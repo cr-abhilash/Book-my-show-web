@@ -5,10 +5,7 @@ export const getTutorialValue=(id)=>{
     return(dispatch)=>{
         TutorialDataService.get(id)
       .then(response => {
-        // this.setState({
-        //   currentTutorial: response.data
-        // });
-        console.log(response.data);
+        console.log(response.data,"action");
         dispatch({type:"GET_TUTORIAL",value:response.data})
 
       })
@@ -52,3 +49,30 @@ export const changeTitle=(getValue)=>{
                   });
             }
             }
+
+            export const updateTutorialValue=(id,currentTutorial)=>{
+                return(dispatch)=>{
+                    TutorialDataService.update(id, currentTutorial)
+                .then(response => {
+
+                    console.log(response.data);
+                    dispatch({type:"UPDATE_TUTORIAL_VALUE",value:response.data})
+            
+                  })
+                  .catch(e => {
+                    console.log(e);
+                  });
+            }
+            }
+            export const deleteTutorialValue=(deleteTutorial)=>{
+                return(dispatch)=>{
+                TutorialDataService.delete(deleteTutorial)
+      .then(response => {
+        console.log(response.data);
+        dispatch({type:"DELETE_TUTORIAL",value:response.data})
+            }).catch(e => {
+                console.log(e);
+              });
+        }
+
+    }

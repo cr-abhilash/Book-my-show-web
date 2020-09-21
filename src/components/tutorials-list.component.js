@@ -80,9 +80,10 @@ this.props.removeAllValue()
     //   });
   }
 
-  searchTitle(id){
-    console.log(id)
-    this.props.oneFetchValue(id)
+  searchTitle(value)
+  {
+    console.log(value,"value")
+    this.props.oneFetchValue(value)
 
   }
 
@@ -118,7 +119,7 @@ this.props.removeAllValue()
               <button
                 className="btn btn-outline-secondary"
                 type="button"
-                onClick={(id)=>this.searchTitle(this.props.searchTitle)}
+                onClick={()=>this.searchTitle(this.props.searchTitle)}
                 // onClick={()=>this.props.oneFetchValue(this.props.searchTitle)}
               >
                 Search

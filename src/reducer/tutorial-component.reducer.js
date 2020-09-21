@@ -43,6 +43,15 @@ case 'UPDATE_BOOKING':{
     }
 }
 
+case 'UPDATE_TUTORIAL_VALUE':{
+    return{...state,
+        message: "The Event was updated successfully!"
+    }
+}
+case "DELETE_TUTORIAL":{
+    return state;
+}
+
 default:
     return state;
 }

@@ -1,9 +1,9 @@
 import React, { Component } from "react";
-import TutorialDataService from "../services/tutorial.service";
+// import TutorialDataService from "../services/tutorial.service";
 import ContactUs from "../services/mail";
 import {connect} from 'react-redux';
 // import { Switch, Route, Link } from "react-router-dom";
-import {getTutorialValue,changeTitle,changeDescription,changeAvailable,updateBookingValue} from './../actions/action_update'
+import {getTutorialValue,changeTitle,changeDescription,changeAvailable,updateBookingValue,updateTutorialValue,deleteTutorialValue} from './../actions/action_update'
 import "../App.css";
  class Tutorial extends Component {
   constructor(props) {
@@ -13,7 +13,7 @@ import "../App.css";
     this.onChangeAvailable = this.onChangeAvailable.bind(this);
     // this.getTutorial = this.getTutorial.bind(this);
     this.updateBooking = this.updateBooking.bind(this);
-    this.updateTutorial = this.updateTutorial.bind(this);
+    // this.updateTutorial = this.updateTutorial.bind(this);
     this.deleteTutorial = this.deleteTutorial.bind(this);
   
     // this.state = {
@@ -88,42 +88,43 @@ import "../App.css";
     //   });
   }
 
-  updateTutorial() {
-    TutorialDataService.update(
-      this.state.currentTutorial.id,
-      this.state.currentTutorial
-    )
-      .then(response => {
-        console.log(response.data);
-        this.setState({
-          message: "The Event was updated successfully!"
-        });
-      })
-      .catch(e => {
-        console.log(e);
-      });
-  }
+  // updateTutorial() {
+  //   TutorialDataService.update(
+  //     this.state.currentTutorial.id,
+  //     this.state.currentTutorial
+  //   )
+  //     .then(response => {
+  //       console.log(response.data);
+  //       this.setState({
+  //         message: "The Event was updated successfully!"
+  //       });
+  //     })
+  //     .catch(e => {
+  //       console.log(e);
+  //     });
+  // }
 
-  deleteTutorial() {    
-    TutorialDataService.delete(this.state.currentTutorial.id)
-      .then(response => {
-        console.log(response.data);
+  deleteTutorial() {  
+    this.props.deleteTutorial1(this.props.currentTutorial.id);
+    // TutorialDataService.delete(this.props.currentTutorial.id)
+    //   .then(response => {
+    //     console.log(response.data);
         this.props.history.push('/tutorials')
-        console.log(this.props.history);
+        // console.log(this.props.history);
         
-      })
-      .catch(e => {
-        console.log(e);
-      });
+      // })
+      // .catch(e => {
+      //   console.log(e);
+      // });
   }
 
   render() {
-    const { currentTutorial } = this.state;
+    // const { currentTutorial } = this.props;
 
     return (
       <div>
         
-        {currentTutorial ? (
+        {this.props.currentTutorial ? (
           <div className="edit-form">
             <h3>Event's Description</h3>
             <form>
@@ -133,7 +134,7 @@ import "../App.css";
                   type="text"
                   className="form-control"
                   id="available"
-                  value={currentTutorial.available}
+                  value={this.props.currentTutorial.available}
                   onChange={this.onChangeAvailable}
                 />
               </div>
@@ -143,7 +144,7 @@ import "../App.css";
                   type="text"
                   className="form-control"
                   id="title"
-                  value={currentTutorial.title}
+                  value={this.props.currentTutorial.title}
                   onChange={this.onChangeTitle}
                 />
               </div>
@@ -153,7 +154,7 @@ import "../App.css";
                   type="text"
                   className="form-control"
                   id="description"
-                  value={currentTutorial.description}
+                  value={this.props.currentTutorial.description}
                   onChange={this.onChangeDescription}
                 />
               </div>
@@ -162,11 +163,11 @@ import "../App.css";
                 <label>
                   <strong>Booking Status:</strong>
                 </label>
-                {currentTutorial.Booking ? "Confirm" : "Pending"}
+                {this.props.currentTutorial.Booking ? "Confirm" : "Pending"}
               </div>
             </form>
 
-            {currentTutorial.Booking ? (
+            {this.props.currentTutorial.Booking ? (
               <button id="publish"
                 className="badge badge-primary mr-2"
                 onClick={() => this.updateBooking(false)}
@@ -192,11 +193,11 @@ import "../App.css";
             <button
               type="submit"
               className="badge badge-success"
-              onClick={this.updateTutorial}
+              onClick={()=>this.props.updateTutorial(this.props.currentTutorial.id,this.props.currentTutorial)}
             >
               Update
             </button>
-            <p>{this.state.message}</p>
+            <p>{this.props.message}</p>
           </div>
         ) : (
           <div>
@@ -216,7 +217,14 @@ import "../App.css";
 
 const mamStateToProps4=(state)=>{
   return {
-    currentTutorial:state.r4.currentTutorial
+    currentTutorial: {
+      id: state.r4.id,
+      title: state.r4.title,
+      description: state.r4.description,
+      Booking: state.r4.Booking,
+      available: state.r4.available,
+    },
+    message: state.r4.message,
   }
 }
 
@@ -226,7 +234,9 @@ return{
   onChangeTitle1:(value)=>{dispatch(changeTitle(value))} ,
   onChangeAvailable1:(value)=>{dispatch(changeAvailable(value))} ,
   onChangeDescription1:(value)=>{dispatch(changeDescription(value))} ,
-  updateBooking1:(value)=>{dispatch(updateBookingValue(value))} 
+  updateBooking1:(value,value1)=>{dispatch(updateBookingValue(value,value1))} ,
+  updateTutorial:(value,value1)=>{dispatch(updateTutorialValue(value,value1))},
+  deleteTutorial1:(value)=>{dispatch(deleteTutorialValue(value))}
 }
   
 }
