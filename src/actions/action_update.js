@@ -68,8 +68,8 @@ export const changeTitle=(getValue)=>{
                 return(dispatch)=>{
                 TutorialDataService.delete(deleteTutorial)
       .then(response => {
-        console.log(response.data);
-        dispatch({type:"DELETE_TUTORIAL",value:response.data})
+        console.log(response.data,"afterDElete");
+        dispatch({type:"DELETE_TUTORIAL",value:""})
             }).catch(e => {
                 console.log(e);
               });

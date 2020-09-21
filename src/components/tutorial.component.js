@@ -104,8 +104,9 @@ import "../App.css";
   //     });
   // }
 
-  deleteTutorial() {  
-    this.props.deleteTutorial1(this.props.currentTutorial.id);
+  deleteTutorial(id) { 
+    console.log("id",id) 
+    this.props.deleteTutorial1(id);
     // TutorialDataService.delete(this.props.currentTutorial.id)
     //   .then(response => {
     //     console.log(response.data);
@@ -120,7 +121,7 @@ import "../App.css";
 
   render() {
     // const { currentTutorial } = this.props;
-
+console.log(this.props.currentTutorial.id,"valueprops")
     return (
       <div>
         
@@ -185,7 +186,7 @@ import "../App.css";
 
             <button
               className="badge badge-danger mr-2"
-              onClick={this.deleteTutorial}
+              onClick={()=>this.deleteTutorial(this.props.currentTutorial.id)}
             >
               Delete
             </button>

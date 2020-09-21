@@ -48,8 +48,8 @@ case 'UPDATE_TUTORIAL_VALUE':{
         message: "The Event was updated successfully!"
     }
 }
-case "DELETE_TUTORIAL":{
-    return state;
+case 'DELETE_TUTORIAL':{
+    return {...state.currentTutorial}
 }
 
 default:

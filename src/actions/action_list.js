@@ -44,13 +44,13 @@ export const findByTitleValue=(titleName)=>{
         export const changeTutorial=(getValue)=>{
             return{
     
-                type:'CHANGE_TUTORIAL_INDEX',
+                type:'CHANGE_TUTORIAL',
                 value:getValue
             }}   
           export const changeIndex=(getValue)=>{
                 return{
         
-                    type:'CHANGE_TUTORIAL_INDEX',
+                    type:'CHANGE_INDEX',
                     value:getValue
                 }}         
     
