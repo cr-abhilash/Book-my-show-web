@@ -1,107 +1,91 @@
 import React, { Component } from "react";
 import TutorialDataService from "../services/tutorial.service";
 import ContactUs from "../services/mail";
+import {connect} from 'react-redux';
 // import { Switch, Route, Link } from "react-router-dom";
+import {getTutorialValue,changeTitle,changeDescription,changeAvailable,updateBookingValue} from './../actions/action_update'
 import "../App.css";
-export default class Tutorial extends Component {
+ class Tutorial extends Component {
   constructor(props) {
     super(props);
     this.onChangeTitle = this.onChangeTitle.bind(this);
     this.onChangeDescription = this.onChangeDescription.bind(this);
     this.onChangeAvailable = this.onChangeAvailable.bind(this);
-    this.getTutorial = this.getTutorial.bind(this);
+    // this.getTutorial = this.getTutorial.bind(this);
     this.updateBooking = this.updateBooking.bind(this);
     this.updateTutorial = this.updateTutorial.bind(this);
     this.deleteTutorial = this.deleteTutorial.bind(this);
   
-    this.state = {
-      currentTutorial: {
-        id: null,
-        title: "",
-        description: "",
-        Booking: false,
-        available: "",
-      },
-      message: "",
-    };
+    // this.state = {
+    //   currentTutorial: {
+    //     id: null,
+    //     title: "",
+    //     description: "",
+    //     Booking: false,
+    //     available: "",
+    //   },
+    //   message: "",
+    // };
   }
 
   componentDidMount() {
-    this.getTutorial(this.props.match.params.id);
+    this.props.getTutorial(this.props.match.params.id);
   }
 
   onChangeTitle(e) {
     const title = e.target.value;
-
-    this.setState(function(prevState) {
-      return {
-        currentTutorial: {
-          ...prevState.currentTutorial,
-          title: title
-        }
-      };
-    });
+    this.props.onChangeTitle1(title);
+    
   }
 
   onChangeAvailable(e) {
     const available = e.target.value;
-
-    this.setState(function(prevState) {
-      return {
-        currentTutorial: {
-          ...prevState.currentTutorial,
-          available: available
-        }
-      };
-    });
+    this.props.onChangeAvailable1(available)
+    
   }
 
   onChangeDescription(e) {
     const description = e.target.value;
-    
-    this.setState(prevState => ({
-      currentTutorial: {
-        ...prevState.currentTutorial,
-        description: description
-      }
-    }));
+    this.props.onChangeDescription1(description)
+   
   }
 
-  getTutorial(id) {
-    TutorialDataService.get(id)
-      .then(response => {
-        this.setState({
-          currentTutorial: response.data
-        });
-        console.log(response.data);
-      })
-      .catch(e => {
-        console.log(e);
-      });
-  }
+  // getTutorial(id) {
+  //   TutorialDataService.get(id)
+  //     .then(response => {
+  //       this.setState({
+  //         currentTutorial: response.data
+  //       });
+  //       console.log(response.data);
+  //     })
+  //     .catch(e => {
+  //       console.log(e);
+  //     });
+  // }
 
   updateBooking(status) {
     var data = {
-      id: this.state.currentTutorial.id,
-      available:this.state.currentTutorial.available,
-      title: this.state.currentTutorial.title,
-      description: this.state.currentTutorial.description,
+      id: this.props.currentTutorial.id,
+      available:this.props.currentTutorial.available,
+      title: this.props.currentTutorial.title,
+      description: this.props.currentTutorial.description,
       Booking: status
     };
 
-    TutorialDataService.update(this.state.currentTutorial.id, data)
-      .then(response => {
-        this.setState(prevState => ({
-          currentTutorial: {
-            ...prevState.currentTutorial,
-            Booking: status
-          }
-        }));
-        console.log(response.data);
-      })
-      .catch(e => {
-        console.log(e);
-      });
+    this.props.updateBooking1(this.props.currentTutorial.id, data)
+    // TutorialDataService.update(this.state.currentTutorial.id, data)
+    //   .then(response => {
+    //     this.setState(prevState => ({
+    //       currentTutorial: {
+    //         ...prevState.currentTutorial,
+    //         Booking: status
+    //       }
+    //     }));
+    //     console.log(response.data);
+    //   })
+    //   .catch(e => {
+    //     console.log(e);
+    //   });
   }
 
   updateTutorial() {
@@ -229,3 +213,22 @@ export default class Tutorial extends Component {
   
   }
 }
+
+const mamStateToProps4=(state)=>{
+  return {
+    currentTutorial:state.r4.currentTutorial
+  }
+}
+
+const mapDispatchToProps4=(dispatch)=>{
+return{
+  getTutorial:(value1)=>{dispatch(getTutorialValue(value1))} ,
+  onChangeTitle1:(value)=>{dispatch(changeTitle(value))} ,
+  onChangeAvailable1:(value)=>{dispatch(changeAvailable(value))} ,
+  onChangeDescription1:(value)=>{dispatch(changeDescription(value))} ,
+  updateBooking1:(value)=>{dispatch(updateBookingValue(value))} 
+}
+  
+}
+export default connect(mamStateToProps4,mapDispatchToProps4)(Tutorial);
+

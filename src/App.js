@@ -7,10 +7,12 @@ import AddTutorial from "./components/add-tutorial.component";
 import Tutorial from "./components/tutorial.component";
 import TutorialsList from "./components/tutorials-list.component";
 import homePage from "./components/home.page";
+import {connect} from 'react-redux';
 
 
 class App extends Component {
   render() {
+    console.log(this.props.myName)
     return (
       <div>
         <nav className="navbar navbar-expand navbar-dark bg-dark">
@@ -43,5 +45,9 @@ class App extends Component {
     );
   }
 }
-
-export default App;
+const mamStateToProps=(state)=>{
+  return {
+    myName:state.name
+  }
+}
+export default connect(mamStateToProps)(App);

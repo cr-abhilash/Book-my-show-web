@@ -1,88 +1,91 @@
 import React, { Component } from "react";
-import TutorialDataService from "../services/tutorial.service";
+// import TutorialDataService from "../services/tutorial.service";
 import "../App.css";
+import {connect} from 'react-redux';
+import {createTitle,createTableValue,newTutorial,changeAvailableAnother,changeDescriptionAnother} from "../actions/action_add"
 
-export default class AddTutorial extends Component {
+ class AddTutorial extends Component {
   constructor(props) {
     super(props);
     this.onChangeTitle = this.onChangeTitle.bind(this);
     this.onChangeAvailable = this.onChangeAvailable.bind(this);
     this.onChangeDescription = this.onChangeDescription.bind(this);
     this.saveTutorial = this.saveTutorial.bind(this);
-    this.newTutorial = this.newTutorial.bind(this);
+    // this.newTutorial = this.newTutorial.bind(this);
 
-    this.state = {
-      id: null,
-      title: "",
-      description: "", 
-      available: "",
-      Booking: false,
+    // this.state = {
+    //   id: null,
+    //   // title: "",
+    //   description: "", 
+    //   available: "",
+    //   Booking: false,
 
-      submitted: false
-    };
+    //   submitted: false
+    // };
   }
 
   onChangeTitle(e) {
-    this.setState({
-      title: e.target.value
-    });
+  //   // this.setState({
+  //   //   title: e.target.value
+  //   // });
+  //   console.log(e.target.value);
+  // this.props.title=e.target.value
+    this.props.createTitleValue(e.target.value);
   }
 
   onChangeDescription(e) {
-    this.setState({
-      description: e.target.value
-    });
+    
+      this.props.onChangeDescription1(e.target.value);
+    
   }
 
   onChangeAvailable(e) {
-    this.setState({
-      available: e.target.value
-    });
+      this.props.onChangeAvailable1(e.target.value);
   }
 
   saveTutorial() {
     var data = {
-      available:this.state.available,
-      title: this.state.title,
-      description: this.state.description
+      available:this.props.available,
+      title: this.props.title,
+      description: this.props.description
     };
 
-    TutorialDataService.create(data)
-      .then(response => {
-        this.setState({
-          available:response.data.available,
-          id: response.data.id,
-          title: response.data.title,
-          description: response.data.description,
-          Booking: response.data.Booking,
+    this.props.createTableValue1(data);
+    // TutorialDataService.create(data)
+    //   .then(response => {
+    //     this.setState({
+    //       available:response.data.available,
+    //       id: response.data.id,
+    //       title: response.data.title,
+    //       description: response.data.description,
+    //       Booking: response.data.Booking,
 
-          submitted: true
-        });
-        console.log(response.data);
-      })
-      .catch(e => {
-        console.log(e);
-      });
+    //       submitted: true
+    //     });
+    //     console.log(response.data);
+    //   })
+    //   .catch(e => {
+    //     console.log(e);
+    //   });
   }
 
-  newTutorial() {
-    this.setState({
-      id: null,
-      title: "",
-      description: "",
-      Booking: false,
+  // newTutorial() {
+  //     this.props.id=null,
+  //     this.props.title="",
+  //     this.props.description= "",
+  //     this.props.Booking=false,
 
-      submitted: false
-    });
-  }
+  //     submitted=false
+  // }
 
   render() {
+    console.log(this.props,"props")
     return (
       <div className="submit-form">
-        {this.state.submitted ? (
+        {this.props.submitted ? (
           <div>
             <h4>You submitted successfully!</h4>
-            <button className="btn btn-success" onClick={this.newTutorial}>
+            <button className="btn btn-success" onClick={this.props.newTutorialValue}>
               Add
             </button>
           </div>
@@ -95,7 +98,7 @@ export default class AddTutorial extends Component {
               className="form-control"
               id="available"
               required
-              value={this.state.available}
+              value={this.props.available}
               onChange={this.onChangeAvailable}
               name="available"
             />
@@ -107,7 +110,7 @@ export default class AddTutorial extends Component {
                 className="form-control"
                 id="title"
                 required
-                value={this.state.title}
+                value={this.props.title}
                 onChange={this.onChangeTitle}
                 name="title"
               />
@@ -120,7 +123,7 @@ export default class AddTutorial extends Component {
                 className="form-control"
                 id="description"
                 required
-                value={this.state.description}
+                value={this.props.description}
                 onChange={this.onChangeDescription}
                 name="description"
               />
@@ -135,3 +138,30 @@ export default class AddTutorial extends Component {
     );
   }
 }
+
+
+
+const mamStateToProps=(state)=>{
+  return {
+    id: state.r2.id,
+    title:state.r2.title,
+    description: state.r2.description, 
+    available: state.r2.r2available,
+    Booking: state.r2.Booking,
+
+    submitted: state.r2.submitted
+  }
+}
+
+const mapDispatchToProps=(dispatch)=>{
+return{
+  createTitleValue:(tittle)=>{dispatch(createTitle(tittle))} ,
+  createTableValue1:(value)=>{dispatch(createTableValue(value))} ,
+  newTutorialValue:()=>{dispatch(newTutorial())} ,
+  // onChangeTitle1:(value)=>{dispatch(changeTitleAnother(value))} ,
+  onChangeAvailable1:(value)=>{dispatch(changeAvailableAnother(value))} ,
+  onChangeDescription1:(value)=>{dispatch(changeDescriptionAnother(value))} ,
+}
+  
+}
+export default connect(mamStateToProps,mapDispatchToProps)(AddTutorial);

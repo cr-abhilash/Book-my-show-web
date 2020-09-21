@@ -1,91 +1,108 @@
 import React, { Component } from "react";
-import TutorialDataService from "../services/tutorial.service";
+// import TutorialDataService from "../services/tutorial.service";
 import { Link } from "react-router-dom";
-export default class TutorialsList extends Component {
+import {connect} from 'react-redux';
+import {getAllValue,findByTitleValue,removeAllValue,changeTutorial,changeIndex,searchTitleValue} from "../actions/action_list";
+
+
+
+  class TutorialsList extends Component {
   constructor(props) {
     super(props);
     this.onChangeSearchTitle = this.onChangeSearchTitle.bind(this);
-    this.retrieveTutorials = this.retrieveTutorials.bind(this);
+    // this.retrieveTutorials = this.retrieveTutorials.bind(this);
     this.refreshList = this.refreshList.bind(this);
     this.setActiveTutorial = this.setActiveTutorial.bind(this);
     this.removeAllTutorials = this.removeAllTutorials.bind(this);
     this.searchTitle = this.searchTitle.bind(this);
 
-    this.state = {
-      tutorials: [],
-      currentTutorial: null,
-      currentIndex: -1,
-      searchTitle: ""
-    };
+    
   }
 
   componentDidMount() {
-    this.retrieveTutorials();
+    // this.retrieveTutorials();
+    this.props.getAllFetchValue();
   }
 
   onChangeSearchTitle(e) {
-    const searchTitle = e.target.value;
+    const searchTitleValue = e.target.value;
 
-    this.setState({
-      searchTitle: searchTitle
-    });
+      this.props.searchTitleFunc(searchTitleValue);
   }
 
-  retrieveTutorials() {
-    TutorialDataService.getAll()
-      .then(response => {
-        this.setState({
-          tutorials: response.data
-        });
-        console.log(response.data);
-      })
-      .catch(e => {
-        console.log(e);
-      });
-  }
+  // retrieveTutorials() {
+
+  //   this.props.getAllFetchValue();
+  //   console.log("props.tutorials");
+
+    // TutorialDataService.getAll()
+    //   .then(response => {
+    //     this.setState({
+    //       tutorials: response.data
+    //     });
+    //     console.log(response.data);
+    //   })
+    //   .catch(e => {
+    //     console.log(e);
+    //   });
+  // }
 
   refreshList() {
-    this.retrieveTutorials();
-    this.setState({
-      currentTutorial: null,
-      currentIndex: -1
-    });
+    // this.retrieveTutorials();
+    this.props.getAllFetchValue();
+    
+    //   this.props.currentTutorial=null,
+    //   this.props.currentIndex= -1
+    this.props.changeTutorialValueFromList(null)
+    this.props.changeIndexValueFromList(-1)
+    
   }
 
   setActiveTutorial(tutorial, index) {
-    this.setState({
-      currentTutorial: tutorial,
-      currentIndex: index
-    });
+    
+    // this.props.currentTutorial= tutorial,
+    // this.props.currentIndex= index
+    this.props.changeTutorialValueFromList(tutorial)
+    this.props.changeIndexValueFromList(index)
+    
   }
 
   removeAllTutorials() {
-    TutorialDataService.deleteAll()
-      .then(response => {
-        console.log(response.data);
-        this.refreshList();
-      })
-      .catch(e => {
-        console.log(e);
-      });
+this.props.removeAllValue()
+    this.refreshList();
+    // TutorialDataService.deleteAll()
+    //   .then(response => {
+    //     console.log(response.data);
+    //     this.refreshList();
+    //   })
+    //   .catch(e => {
+    //     console.log(e);
+    //   });
   }
 
-  searchTitle() {
-    TutorialDataService.findByTitle(this.state.searchTitle)
-      .then(response => {
-        this.setState({
-          tutorials: response.data
-        });
-        console.log(response.data);
-      })
-      .catch(e => {
-        console.log(e);
-      });
+  searchTitle(id){
+    console.log(id)
+    this.props.oneFetchValue(id)
+
   }
+
+  // searchTitle() {
+    // TutorialDataService.findByTitle(this.state.searchTitle)
+    //   .then(response => {
+    //     this.setState({
+    //       tutorials: response.data
+    //     });
+    //     console.log(response.data);
+    //   })
+    //   .catch(e => {
+    //     console.log(e);
+    //   });
+  // }
 
   render() {
-    const { searchTitle, tutorials, currentTutorial, currentIndex } = this.state;
-
+    // const {  this.props.currentTutorial, this.props.currentIndex } = this.state;
+    // const {tutorials}=this.props;
+    console.log(this.props.searchTitle,"allprops");
     return (
       <div className="list row">
         <div className="col-md-8">
@@ -94,14 +111,15 @@ export default class TutorialsList extends Component {
               type="text"
               className="form-control"
               placeholder="Search by title"
-              value={searchTitle}
+              value={this.props.searchTitle}
               onChange={this.onChangeSearchTitle}
             />
             <div className="input-group-append">
               <button
                 className="btn btn-outline-secondary"
                 type="button"
-                onClick={this.searchTitle}
+                onClick={(id)=>this.searchTitle(this.props.searchTitle)}
+                // onClick={()=>this.props.oneFetchValue(this.props.searchTitle)}
               >
                 Search
               </button>
@@ -113,12 +131,12 @@ export default class TutorialsList extends Component {
           <h4 id ="head-name"> Events List</h4>
 
           <ul className="list-group" id ="createEvent">
-            {tutorials &&
-              tutorials.map((tutorial, index) => (
+            {this.props.tutorials &&
+              this.props.tutorials.map((tutorial, index) => (
                 <li
                   className={
                     "list-group-item " +
-                    (index === currentIndex ? "active" : "")
+                    (index === this.props.currentIndex ? "active" : "")
                   }
                   onClick={() => this.setActiveTutorial(tutorial, index)}
                   key={index}
@@ -136,36 +154,36 @@ export default class TutorialsList extends Component {
           </button>
         </div>
         <div className="col-md-6" id ="test">
-          {currentTutorial ? (
+          {this.props.currentTutorial ? (
             <div>
               <h4>Events</h4>
               <div>
                 <label>
                   <strong>Event Status:</strong>
                 </label>{" "}
-                {currentTutorial.available}
+                {this.props.currentTutorial.available}
               </div>
               <div>
                 <label>
                   <strong>Title:</strong>
                 </label>{" "}
-                {currentTutorial.title}
+                {this.props.currentTutorial.title}
               </div>
               <div>
                 <label>
                   <strong>Description:</strong>
                 </label>{" "}
-                {currentTutorial.description}
+                {this.props.currentTutorial.description}
               </div>
               <div>
                 <label>
                   <strong>Booking:</strong>
                 </label>{" "}
-                {currentTutorial.published ? "Confirm" : "Pending"}
+                {this.props.currentTutorial.published ? "Confirm" : "Pending"}
               </div>
 
               <Link
-                to={"/tutorials/" + currentTutorial.id}
+                to={"/tutorials/" + this.props.currentTutorial.id}
                 className="badge badge-warning"
               >
                 Edit
@@ -182,3 +200,27 @@ export default class TutorialsList extends Component {
     );
   }
 }
+
+const mamStateToProps1=(state)=>{
+  console.log(state,"state")
+  return {
+    tutorials:state.r3.tutorials,
+    currentTutorial: state.r3.currentTutorial,
+    currentIndex: state.r3.currentIndex,
+    searchTitle: state.r3.searchTitle
+  }
+}
+
+const mapDispatchToProps1=(dispatch)=>{
+return{
+  getAllFetchValue:()=>{dispatch(getAllValue())} ,
+  oneFetchValue:(Title)=>{dispatch(findByTitleValue(Title))} ,
+  removeAllValueFromList:()=>{dispatch(removeAllValue())} ,
+  changeTutorialValueFromList:(val)=>{dispatch(changeTutorial(val))} ,
+  changeIndexValueFromList:(val1)=>{dispatch(changeIndex(val1))} ,
+  searchTitleFunc:(val1)=>{dispatch(searchTitleValue(val1))} 
+}
+  
+}
+
+export default connect(mamStateToProps1,mapDispatchToProps1)(TutorialsList);
