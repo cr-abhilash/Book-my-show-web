@@ -121,7 +121,7 @@ import "../App.css";
 
   render() {
     // const { currentTutorial } = this.props;
-console.log(this.props.currentTutorial.id,"valueprops")
+console.log(this.props,"valueprops")
     return (
       <div>
         
@@ -218,13 +218,16 @@ console.log(this.props.currentTutorial.id,"valueprops")
 
 const mamStateToProps4=(state)=>{
   return {
-    currentTutorial: {
-      id: state.r4.id,
-      title: state.r4.title,
-      description: state.r4.description,
-      Booking: state.r4.Booking,
-      available: state.r4.available,
-    },
+
+    currentTutorial:state.r4.currentTutorial,
+    
+    // currentTutorial: {
+    //   id: state.r4.id,
+    //   title: state.r4.title,
+    //   description: state.r4.description,
+    //   Booking: state.r4.Booking,
+    //   available: state.r4.available,
+    // },
     message: state.r4.message,
   }
 }
