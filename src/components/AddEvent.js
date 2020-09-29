@@ -103,7 +103,7 @@ class AddTutorial extends Component {
   }
 }
 
-const mamStateToProps = (state) => {
+const mapStateToProps = (state) => {
   return {
     id: state.r2.id,
     title: state.r2.title,
@@ -134,4 +134,4 @@ const mapDispatchToProps = (dispatch) => {
     },
   };
 };
-export default connect(mamStateToProps, mapDispatchToProps)(AddTutorial);
+export default connect(mapStateToProps, mapDispatchToProps)(AddTutorial);
