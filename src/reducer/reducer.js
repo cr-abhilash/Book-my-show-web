@@ -1,7 +1,7 @@
 
 
 const initialState={
-    name:"pallabi"
+    name:"Rahul"
 }
 
 const reducer=(state=initialState,action)=>{
