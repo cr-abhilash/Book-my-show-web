@@ -13,6 +13,7 @@ export const getAllValue = () => {
   };
 };
 
+// get called when click on search button
 export const findByTitleValue = (titleName) => {
   console.log(titleName);
   return (dispatch) => {
@@ -26,6 +27,8 @@ export const findByTitleValue = (titleName) => {
       });
   };
 };
+
+// when clicked on removeall button
 export const removeAllValue = () => {
   return (dispatch) => {
     EventDataService.deleteAll()
@@ -39,12 +42,14 @@ export const removeAllValue = () => {
   };
 };
 
+// when clicked on any event pass that event inforamation to it
 export const changeEvent = (getValue) => {
   return {
     type: "CHANGE_EVENT",
     value: getValue,
   };
 };
+// when clicked on any event passed that event index value to it
 export const changeIndex = (getValue) => {
   return {
     type: "CHANGE_INDEX",
@@ -52,6 +57,7 @@ export const changeIndex = (getValue) => {
   };
 };
 
+// searchbar Value onChange action
 export const searchTitleValue = (getValue) => {
   return {
     type: "SEARCH_TITLE",
