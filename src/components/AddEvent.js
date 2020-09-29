@@ -1,21 +1,15 @@
 import React, { Component } from "react";
 import "../App.css";
-import { connect } from "react-redux";
-import {
-  createTitle,
-  createTableValue,
-  newTutorial,
-  changeAvailableAnother,
-  changeDescriptionAnother,
-} from "../actions/action_add";
+import {connect} from 'react-redux';
+import {createTitle,createTableValue,newEvent,changeAvailableAnother,changeDescriptionAnother} from "../actions/action_add"
 
-class AddTutorial extends Component {
+ class AddEvent extends Component {
   constructor(props) {
     super(props);
     this.onChangeTitle = this.onChangeTitle.bind(this);
     this.onChangeAvailable = this.onChangeAvailable.bind(this);
     this.onChangeDescription = this.onChangeDescription.bind(this);
-    this.saveTutorial = this.saveTutorial.bind(this);
+    this.saveEvent = this.saveEvent.bind(this);
   }
 
   onChangeTitle(e) {
@@ -23,50 +17,50 @@ class AddTutorial extends Component {
   }
 
   onChangeDescription(e) {
-    this.props.onChangeDescription1(e.target.value);
+    
+      this.props.onChangeDescription1(e.target.value);
+    
   }
 
   onChangeAvailable(e) {
-    this.props.onChangeAvailable1(e.target.value);
+      this.props.onChangeAvailable1(e.target.value);
   }
 
-  saveTutorial() {
+  saveEvent() {
     var data = {
-      available: this.props.available,
+      available:this.props.available,
       title: this.props.title,
-      description: this.props.description,
+      description: this.props.description
     };
 
     this.props.createTableValue1(data);
   }
+
   render() {
-    console.log(this.props, "props");
+    console.log(this.props,"props")
     return (
       <div className="submit-form">
         {this.props.submitted ? (
           <div>
             <h4>You submitted successfully!</h4>
-            <button
-              className="btn btn-success"
-              onClick={this.props.newTutorialValue}
-            >
+            <button className="btn btn-success" onClick={this.props.newEventValue}>
               Add
             </button>
           </div>
         ) : (
-          <div>
-            <div className="form-group">
-              <label htmlFor="available">Event Status</label>
-              <input
-                type="text"
-                className="form-control"
-                id="available"
-                required
-                value={this.props.available}
-                onChange={this.onChangeAvailable}
-                name="available"
-              />
-            </div>
+          <div >
+          <div className="form-group">
+            <label htmlFor="available">Event Status</label>
+            <input
+              type="text"
+              className="form-control"
+              id="available"
+              required
+              value={this.props.available}
+              onChange={this.onChangeAvailable}
+              name="available"
+            />
+          </div>
             <div className="form-group">
               <label htmlFor="title">Title</label>
               <input
@@ -93,7 +87,7 @@ class AddTutorial extends Component {
               />
             </div>
 
-            <button onClick={this.saveTutorial} className="btn btn-success">
+            <button onClick={this.saveEvent} className="btn btn-success">
               Submit
             </button>
           </div>
@@ -103,35 +97,28 @@ class AddTutorial extends Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
-    id: state.r2.id,
-    title: state.r2.title,
-    description: state.r2.description,
-    available: state.r2.r2available,
-    Booking: state.r2.Booking,
 
-    submitted: state.r2.submitted,
-  };
-};
 
-const mapDispatchToProps = (dispatch) => {
+const mapStateToProps=(state)=>{
   return {
-    createTitleValue: (tittle) => {
-      dispatch(createTitle(tittle));
-    },
-    createTableValue1: (value) => {
-      dispatch(createTableValue(value));
-    },
-    newTutorialValue: () => {
-      dispatch(newTutorial());
-    },
-    onChangeAvailable1: (value) => {
-      dispatch(changeAvailableAnother(value));
-    },
-    onChangeDescription1: (value) => {
-      dispatch(changeDescriptionAnother(value));
-    },
-  };
-};
-export default connect(mapStateToProps, mapDispatchToProps)(AddTutorial);
+    id: state.addNewEvent.id,
+    title:state.addNewEvent.title,
+    description: state.addNewEvent.description, 
+    available: state.addNewEvent.r2available,
+    Booking: state.addNewEvent.Booking,
+
+    submitted: state.addNewEvent.submitted
+  }
+}
+
+const mapDispatchToProps=(dispatch)=>{
+return{
+  createTitleValue:(tittle)=>{dispatch(createTitle(tittle))} ,
+  createTableValue1:(value)=>{dispatch(createTableValue(value))} ,
+  newEventValue:()=>{dispatch(newEvent())} ,
+  onChangeAvailable1:(value)=>{dispatch(changeAvailableAnother(value))} ,
+  onChangeDescription1:(value)=>{dispatch(changeDescriptionAnother(value))} ,
+}
+  
+}
+export default connect(mapStateToProps,mapDispatchToProps)(AddEvent);
