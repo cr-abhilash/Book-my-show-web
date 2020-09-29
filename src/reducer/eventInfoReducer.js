@@ -10,7 +10,7 @@ const initialState={
     
 }
 
-const reducer4=(state=initialState,action)=>{
+const Event_Component=(state=initialState,action)=>{
     switch(action.type){
     case 'GET_TUTORIAL':
     {
@@ -56,4 +56,4 @@ default:
     return state;
 }
 }
-export default reducer4;
+export default Event_Component;
