@@ -6,12 +6,11 @@ import AddEvent from "./components/AddEvent";
 import Event from "./components/Event";
 import EventList from "./components/EventList";
 import HomePage from "./components/HomePage";
-import {connect} from 'react-redux';
-
+import { connect } from "react-redux";
 
 class App extends Component {
   render() {
-    console.log(this.props.myName)
+    console.log(this.props.myName);
     return (
       <div>
         <nav className="navbar navbar-expand navbar-dark bg-dark">
@@ -34,19 +33,19 @@ class App extends Component {
 
         <div className="container mt-3">
           <Switch>
-          <Route exact path={["/", "/homePage"]} component={homePage} />
-            <Route exact path= "/tutorials" component={TutorialsList} />
-            <Route exact path="/add" component={AddTutorial} />
-            <Route path="/tutorials/:id"  component={Tutorial} />
+            <Route exact path={"/"} component={HomePage} />
+            <Route exact path="/Events" component={EventList} />
+            <Route exact path="/addEvent" component={AddEvent} />
+            <Route path="/Events/:id" component={Event} />
           </Switch>
         </div>
       </div>
     );
   }
 }
-const mamStateToProps=(state)=>{
+const mamStateToProps = (state) => {
   return {
-    myName:state.name
-  }
-}
+    myName: state.name,
+  };
+};
 export default connect(mamStateToProps)(App);
