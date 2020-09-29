@@ -39,9 +39,9 @@ export const removeAllValue = () => {
   };
 };
 
-export const changeTutorial = (getValue) => {
+export const changeEvent = (getValue) => {
   return {
-    type: "CHANGE_TUTORIAL",
+    type: "CHANGE_EVENT",
     value: getValue,
   };
 };
