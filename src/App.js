@@ -33,7 +33,7 @@ class App extends Component {
 
         <div className="container mt-3">
           <Switch>
-            <Route exact path={["/"]} component={HomePage} />
+            <Route exact path= "/" component={HomePage} />
             <Route exact path="/Events" component={EventList} />
             <Route exact path="/addEvent" component={AddEvent} />
             <Route path="/Events/:id" component={Event} />
