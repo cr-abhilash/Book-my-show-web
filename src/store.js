@@ -3,3 +3,4 @@ import reducer from "./reducer/reducer";
 import addNewEvent from "./reducer/addEventReducer";
 import eventListReducer from "./reducer/eventListReducer";
 import eventInfoReducer from "./reducer/eventInfoReducer";
+import thunk from 'redux-thunk';
