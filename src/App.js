@@ -2,11 +2,10 @@ import React, { Component } from "react";
 import { Switch, Route, Link } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
-// import Contract from "./services/mail";
-import AddTutorial from "./components/add-tutorial.component";
-import Tutorial from "./components/tutorial.component";
-import TutorialsList from "./components/tutorials-list.component";
-import homePage from "./components/home.page";
+import AddEvent from "./components/AddEvent";
+import Event from "./components/Event";
+import EventList from "./components/EventList";
+import HomePage from "./components/HomePage";
 import {connect} from 'react-redux';
 
 
