@@ -1,5 +1,5 @@
 const initialState={
-    currentTutorial: {
+    currentEvent: {
         id: null,
         title: "",
         description: "",
@@ -12,44 +12,44 @@ const initialState={
 
 const Event_Component=(state=initialState,action)=>{
     switch(action.type){
-    case 'GET_TUTORIAL':
+    case 'GET_EVENT':
     {
     return{...state,
-        currentTutorial: action.value
+        currentEvent: action.value
     }
 }
     case 'CHANGE_TITLE':
     {
-    return{...state.currentTutorial,
+    return{...state.currentEvent,
         title: action.value
     }
 }
 
 case 'CHANGE_AVAILABLE':
     {
-    return{...state.currentTutorial,
+    return{...state.currentEvent,
         available: action.value
     }
 }
 case 'CHANGE_DESCRIPTION':{
-    return{...state.currentTutorial,
-        currentTutorial: action.value
+    return{...state.currentEvent,
+        currentEvent: action.value
     }
 }
 
 case 'UPDATE_BOOKING':{
-    return{...state.currentTutorial,
+    return{...state.currentEvent,
         Booking: action.value
     }
 }
 
-case 'UPDATE_TUTORIAL_VALUE':{
+case 'UPDATE_EVENT_VALUE':{
     return{...state,
         message: "The Event was updated successfully!"
     }
 }
-case 'DELETE_TUTORIAL':{
-    return {...state.currentTutorial}
+case 'DELETE_EVENT':{
+    return {...state.currentEvent}
 }
 
 default:
