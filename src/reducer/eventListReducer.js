@@ -5,7 +5,7 @@ const initialState={
       searchTitle: ""
 }
 
-const reducer2=(state=initialState,action)=>{
+const eventListReducer=(state=initialState,action)=>{
     switch(action.type){
     case 'GET_ALL':
     {
@@ -48,4 +48,4 @@ default:
     return state;
 }
 }
-export default reducer2;
+export default eventListReducer;
