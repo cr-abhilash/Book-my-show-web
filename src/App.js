@@ -14,17 +14,17 @@ class App extends Component {
     return (
       <div>
         <nav className="navbar navbar-expand navbar-dark bg-dark">
-          <a href="/homePage" className="navbar-brand">
-            MyFunShow
-          </a>
+          <Link to="/">
+            <h1 className="navbar-brand">MyFunShow</h1>
+          </Link>
           <div className="navbar-nav mr-auto">
             <li className="nav-item">
-              <Link to={"/tutorials"} className="nav-link">
+              <Link to={"/Events"} className="nav-link">
                 Events
               </Link>
             </li>
             <li className="nav-item">
-              <Link to={"/add"} className="nav-link">
+              <Link to={"/addEvent"} className="nav-link">
                 Add Event
               </Link>
             </li>
@@ -33,7 +33,7 @@ class App extends Component {
 
         <div className="container mt-3">
           <Switch>
-            <Route exact path={"/"} component={HomePage} />
+            <Route exact path={["/"]} component={HomePage} />
             <Route exact path="/Events" component={EventList} />
             <Route exact path="/addEvent" component={AddEvent} />
             <Route path="/Events/:id" component={Event} />
@@ -43,9 +43,9 @@ class App extends Component {
     );
   }
 }
-const mamStateToProps = (state) => {
+const mapStateToProps = (state) => {
   return {
     myName: state.name,
   };
 };
-export default connect(mamStateToProps)(App);
+export default connect(mapStateToProps)(App);
