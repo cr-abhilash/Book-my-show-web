@@ -2,29 +2,30 @@ import React, { Component } from "react";
 import ContactUs from "../services/mail";
 import { connect } from "react-redux";
 import {
-  getTutorialValue,
+  getEventValue,
   changeTitle,
   changeDescription,
   changeAvailable,
   updateBookingValue,
-  updateTutorialValue,
-  deleteTutorialValue,
-} from "../actions/action_update";
+  updateEventValue,
+  deleteEventValue,
+} from "./../actions/action_update";
 import "../App.css";
-class Tutorial extends Component {
+class Event extends Component {
   constructor(props) {
     super(props);
     this.onChangeTitle = this.onChangeTitle.bind(this);
     this.onChangeDescription = this.onChangeDescription.bind(this);
     this.onChangeAvailable = this.onChangeAvailable.bind(this);
     this.updateBooking = this.updateBooking.bind(this);
-    this.deleteTutorial = this.deleteTutorial.bind(this);
+    this.deleteEvents = this.deleteEvents.bind(this);
   }
 
   componentDidMount() {
-    this.props.getTutorial(this.props.match.params.id);
+    this.props.getEvent(this.props.match.params.id);
   }
 
+  // get called whenever clicked on search button
   onChangeTitle(e) {
     const title = e.target.value;
     this.props.onChangeTitle1(title);
@@ -42,19 +43,19 @@ class Tutorial extends Component {
 
   updateBooking(status) {
     var data = {
-      id: this.props.currentTutorial.id,
-      available: this.props.currentTutorial.available,
-      title: this.props.currentTutorial.title,
-      description: this.props.currentTutorial.description,
+      id: this.props.currentEvent.id,
+      available: this.props.currentEvent.available,
+      title: this.props.currentEvent.title,
+      description: this.props.currentEvent.description,
       Booking: status,
     };
 
-    this.props.updateBooking1(this.props.currentTutorial.id, data);
+    this.props.updateBooking1(this.props.currentEvent.id, data);
   }
 
-  deleteTutorial(id) {
+  deleteEvents(id) {
     console.log("id", id);
-    this.props.deleteTutorial1(id);
+    this.props.deleteEvent(id);
     this.props.history.push("/tutorials");
   }
 
@@ -62,7 +63,7 @@ class Tutorial extends Component {
     console.log(this.props, "valueprops");
     return (
       <div>
-        {this.props.currentTutorial ? (
+        {this.props.currentEvent ? (
           <div className="edit-form">
             <h3>Event's Description</h3>
             <form>
@@ -72,7 +73,7 @@ class Tutorial extends Component {
                   type="text"
                   className="form-control"
                   id="available"
-                  value={this.props.currentTutorial.available}
+                  value={this.props.currentEvent.available}
                   onChange={this.onChangeAvailable}
                 />
               </div>
@@ -82,7 +83,7 @@ class Tutorial extends Component {
                   type="text"
                   className="form-control"
                   id="title"
-                  value={this.props.currentTutorial.title}
+                  value={this.props.currentEvent.title}
                   onChange={this.onChangeTitle}
                 />
               </div>
@@ -92,7 +93,7 @@ class Tutorial extends Component {
                   type="text"
                   className="form-control"
                   id="description"
-                  value={this.props.currentTutorial.description}
+                  value={this.props.currentEvent.description}
                   onChange={this.onChangeDescription}
                 />
               </div>
@@ -101,11 +102,11 @@ class Tutorial extends Component {
                 <label>
                   <strong>Booking Status:</strong>
                 </label>
-                {this.props.currentTutorial.Booking ? "Confirm" : "Pending"}
+                {this.props.currentEvent.Booking ? "Confirm" : "Pending"}
               </div>
             </form>
 
-            {this.props.currentTutorial.Booking ? (
+            {this.props.currentEvent.Booking ? (
               <button
                 id="publish"
                 className="badge badge-primary mr-2"
@@ -125,7 +126,7 @@ class Tutorial extends Component {
 
             <button
               className="badge badge-danger mr-2"
-              onClick={() => this.deleteTutorial(this.props.currentTutorial.id)}
+              onClick={() => this.deleteEvents(this.props.currentEvent.id)}
             >
               Delete
             </button>
@@ -134,9 +135,9 @@ class Tutorial extends Component {
               type="submit"
               className="badge badge-success"
               onClick={() =>
-                this.props.updateTutorial(
-                  this.props.currentTutorial.id,
-                  this.props.currentTutorial
+                this.props.updateEvent(
+                  this.props.currentEvent.id,
+                  this.props.currentEvent
                 )
               }
             >
@@ -158,18 +159,17 @@ class Tutorial extends Component {
   }
 }
 
-const mamStateToProps4 = (state) => {
+const mapStateToProps= (state) => {
   return {
-    currentTutorial: state.r4.currentTutorial,
-
-    message: state.r4.message,
+    currentEvent: state.eventInfoReducer.currentEvent,
+    message: state.eventInfoReducer.message,
   };
 };
 
-const mapDispatchToProps4 = (dispatch) => {
+const mapDispatchToProps = (dispatch) => {
   return {
-    getTutorial: (value1) => {
-      dispatch(getTutorialValue(value1));
+    getEvent: (value1) => {
+      dispatch(getEventValue(value1));
     },
     onChangeTitle1: (value) => {
       dispatch(changeTitle(value));
@@ -183,12 +183,12 @@ const mapDispatchToProps4 = (dispatch) => {
     updateBooking1: (value, value1) => {
       dispatch(updateBookingValue(value, value1));
     },
-    updateTutorial: (value, value1) => {
-      dispatch(updateTutorialValue(value, value1));
+    updateEvent: (value, value1) => {
+      dispatch(updateEventValue(value, value1));
     },
-    deleteTutorial1: (value) => {
-      dispatch(deleteTutorialValue(value));
+    deleteEvent: (value) => {
+      dispatch(deleteEventValue(value));
     },
   };
 };
-export default connect(mamStateToProps4, mapDispatchToProps4)(Tutorial);
+export default connect(mapStateToProps, mapDispatchToProps)(Event);
