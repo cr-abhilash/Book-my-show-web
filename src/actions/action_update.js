@@ -1,11 +1,11 @@
 import EventDataService from "../services/eventService";
 
-export const getTutorialValue = (id) => {
+export const getEventValue = (id) => {
   return (dispatch) => {
     EventDataService.get(id)
       .then((response) => {
         console.log(response.data, "action");
-        dispatch({ type: "GET_TUTORIAL", value: response.data });
+        dispatch({ type: "GET_EVENT", value: response.data });
       })
       .catch((e) => {
         console.log(e);
@@ -46,24 +46,24 @@ export const updateBookingValue = (id, data) => {
   };
 };
 
-export const updateTutorialValue = (id, currentTutorial) => {
+export const updateEventValue = (id, currentEvent) => {
   return (dispatch) => {
-    EventDataService.update(id, currentTutorial)
+    EventDataService.update(id, currentEvent)
       .then((response) => {
         console.log(response.data);
-        dispatch({ type: "UPDATE_TUTORIAL_VALUE", value: response.data });
+        dispatch({ type: "UPDATE_EVENT_VALUE", value: response.data });
       })
       .catch((e) => {
         console.log(e);
       });
   };
 };
-export const deleteTutorialValue = (deleteTutorial) => {
+export const deleteEventValue = (deleteEvent) => {
   return (dispatch) => {
-    EventDataService.delete(deleteTutorial)
+    EventDataService.delete(deleteEvent)
       .then((response) => {
         console.log(response.data, "afterDElete");
-        dispatch({ type: "DELETE_TUTORIAL", value: "" });
+        dispatch({ type: "DELETE_EVENT", value: "" });
       })
       .catch((e) => {
         console.log(e);
