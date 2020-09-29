@@ -1,59 +1,61 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import {connect} from 'react-redux';
-import {getAllValue,findByTitleValue,removeAllValue,changeTutorial,changeIndex,searchTitleValue} from "../actions/action_list";
+import { connect } from "react-redux";
+import {
+  getAllValue,
+  findByTitleValue,
+  removeAllValue,
+  changeEvent,
+  changeIndex,
+  searchTitleValue,
+} from "../actions/action_list";
 
-
-
-  class TutorialsList extends Component {
+class EventList extends Component {
   constructor(props) {
     super(props);
     this.onChangeSearchTitle = this.onChangeSearchTitle.bind(this);
     this.refreshList = this.refreshList.bind(this);
-    this.setActiveTutorial = this.setActiveTutorial.bind(this);
-    this.removeAllTutorials = this.removeAllTutorials.bind(this);
+    this.setActiveEvent = this.setActiveEvent.bind(this);
+    this.removeAllEvents= this.removeAllEvents.bind(this);
     this.searchTitle = this.searchTitle.bind(this);
-
-    
   }
 
   componentDidMount() {
     this.props.getAllFetchValue();
   }
 
+  // get called whenever input value cahnged inside search bar
   onChangeSearchTitle(e) {
     const searchTitleValue = e.target.value;
-
-      this.props.searchTitleFunc(searchTitleValue);
+    this.props.searchTitleFunc(searchTitleValue);
   }
 
   refreshList() {
     this.props.getAllFetchValue();
-    this.props.changeTutorialValueFromList(null)
-    this.props.changeIndexValueFromList(-1)
-    
+    this.props.changeEventValueFromList(null);
+    this.props.changeIndexValueFromList(-1);
   }
 
-  setActiveTutorial(tutorial, index) {
-    this.props.changeTutorialValueFromList(tutorial)
-    this.props.changeIndexValueFromList(index)
-    
+  // when clicked on any event set that event information inside currentTutorial
+  setActiveEvent(tutorial, index) {
+    this.props.changeEventValueFromList(tutorial);
+    this.props.changeIndexValueFromList(index);
   }
 
-  removeAllTutorials() {
-this.props.removeAllValue()
+  // when clicked on removealll button
+  removeAllEvents() {
+    this.props.removeAllValue();
     this.refreshList();
   }
 
-  searchTitle(value)
-  {
-    console.log(value,"value")
-    this.props.oneFetchValue(value)
-
+  // called when click on search button 
+  searchTitle(value) {
+    console.log(value, "value");
+    this.props.oneFetchValue(value);
   }
 
   render() {
-    console.log(this.props.searchTitle,"allprops");
+    console.log(this.props.searchTitle, "allprops");
     return (
       <div className="list row">
         <div className="col-md-8">
@@ -69,71 +71,74 @@ this.props.removeAllValue()
               <button
                 className="btn btn-outline-secondary"
                 type="button"
-                onClick={()=>this.searchTitle(this.props.searchTitle)}
+                onClick={() => this.searchTitle(this.props.searchTitle)}
               >
                 Search
               </button>
             </div>
           </div>
-          <div id="head"> <h1>Enjoy your day at fullest..</h1> </div>
+          <div id="head">
+            {" "}
+            <h1>Enjoy your day at fullest..</h1>{" "}
+          </div>
         </div>
-        <div className="col-md-6" >
-          <h4 id ="head-name"> Events List</h4>
+        <div className="col-md-6">
+          <h4 id="head-name"> Events List</h4>
 
-          <ul className="list-group" id ="createEvent">
-            {this.props.tutorials &&
-              this.props.tutorials.map((tutorial, index) => (
+          <ul className="list-group" id="createEvent">
+            {this.props.events &&
+              this.props.events.map((event, index) => (
                 <li
                   className={
                     "list-group-item " +
                     (index === this.props.currentIndex ? "active" : "")
                   }
-                  onClick={() => this.setActiveTutorial(tutorial, index)}
+                  onClick={() => this.setActiveEvent(event, index)}
                   key={index}
                 >
-                  {tutorial.title}
+                  {event.title}
                 </li>
               ))}
           </ul>
 
           <button
             className="m-3 btn btn-sm btn-danger"
-            onClick={this.removeAllTutorials}
+            onClick={this.removeAllEvents}
           >
             Remove All
           </button>
         </div>
-        <div className="col-md-6" id ="test">
-          {this.props.currentTutorial ? (
+        <div className="col-md-6" id="test">
+          {this.props.currentEvent ? (
             <div>
               <h4>Events</h4>
               <div>
                 <label>
                   <strong>Event Status:</strong>
                 </label>{" "}
-                {this.props.currentTutorial.available}
+                {this.props.currentEvent.available}
               </div>
               <div>
                 <label>
                   <strong>Title:</strong>
                 </label>{" "}
-                {this.props.currentTutorial.title}
+                {this.props.currentEvent.title}
               </div>
               <div>
                 <label>
                   <strong>Description:</strong>
                 </label>{" "}
-                {this.props.currentTutorial.description}
+                {this.props.currentEvent.description}
               </div>
               <div>
                 <label>
                   <strong>Booking:</strong>
                 </label>{" "}
-                {this.props.currentTutorial.published ? "Confirm" : "Pending"}
+                {this.props.currentEvent.published ? "Confirm" : "Pending"}
               </div>
 
               <Link
-                to={"/tutorials/" + this.props.currentTutorial.id}
+                to={"/Events/" + this.props.currentEvent.id}
                 className="badge badge-warning"
               >
                 Edit
@@ -151,26 +156,37 @@ this.props.removeAllValue()
   }
 }
 
-const mapStateToProps1=(state)=>{
-  console.log(state,"state")
+const mapStateToProps1 = (state) => {
+  console.log(state, "state");
   return {
-    tutorials:state.r3.tutorials,
-    currentTutorial: state.r3.currentTutorial,
-    currentIndex: state.r3.currentIndex,
-    searchTitle: state.r3.searchTitle
-  }
-}
+    events: state.eventListReducer.events,
+    currentEvent: state.eventListReducer.currentEvent,
+    currentIndex: state.eventListReducer.currentIndex,
+    searchTitle: state.eventListReducer.searchTitle,
+  };
+};
 
-const mapDispatchToProps1=(dispatch)=>{
-return{
-  getAllFetchValue:()=>{dispatch(getAllValue())} ,
-  oneFetchValue:(Title)=>{dispatch(findByTitleValue(Title))} ,
-  removeAllValueFromList:()=>{dispatch(removeAllValue())} ,
-  changeTutorialValueFromList:(val)=>{dispatch(changeTutorial(val))} ,
-  changeIndexValueFromList:(val1)=>{dispatch(changeIndex(val1))} ,
-  searchTitleFunc:(val1)=>{dispatch(searchTitleValue(val1))} 
-}
-  
-}
+const mapDispatchToProps1 = (dispatch) => {
+  return {
+    getAllFetchValue: () => {
+      dispatch(getAllValue());
+    },
+    oneFetchValue: (Title) => {
+      dispatch(findByTitleValue(Title));
+    },
+    removeAllValueFromList: () => {
+      dispatch(removeAllValue());
+    },
+    changeEventValueFromList: (val) => {
+      dispatch(changeEvent(val));
+    },
+    changeIndexValueFromList: (val1) => {
+      dispatch(changeIndex(val1));
+    },
+    searchTitleFunc: (val1) => {
+      dispatch(searchTitleValue(val1));
+    },
+  };
+};
 
-export default connect(mapStateToProps1,mapDispatchToProps1)(TutorialsList);
+export default connect(mapStateToProps1, mapDispatchToProps1)(EventList);
