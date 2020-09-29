@@ -151,7 +151,7 @@ this.props.removeAllValue()
   }
 }
 
-const mamStateToProps1=(state)=>{
+const mapStateToProps1=(state)=>{
   console.log(state,"state")
   return {
     tutorials:state.r3.tutorials,
@@ -173,4 +173,4 @@ return{
   
 }
 
-export default connect(mamStateToProps1,mapDispatchToProps1)(TutorialsList);
+export default connect(mapStateToProps1,mapDispatchToProps1)(TutorialsList);
