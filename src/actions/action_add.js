@@ -1,4 +1,4 @@
-import TutorialDataService from "../services/tutorial.service";
+import EventDataService from "../services/eventService";
 
 export const createTitle = (getValue) => {
   return {
@@ -9,7 +9,7 @@ export const createTitle = (getValue) => {
 
 export const createTableValue = (data) => {
   return (dispatch) => {
-    TutorialDataService.create(data)
+    EventDataService.create(data)
       .then((response) => {
         console.log(response.data);
         dispatch({ type: "CREATE_TABLE", value: response.data });
