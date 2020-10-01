@@ -1,0 +1,41 @@
+.SingleMovieContainer {
+  margin-left: 10%;
+  margin-right: 10%;
+  color: #222222;
+}
+.SingleMovieContainer p {
+  margin: 0;
+  font-size: 16px;
+}
+.MovieImage {
+  width: 100%;
+  text-align: center;
+  background-color: white;
+}
+.SingleMovieImage {
+  height: 600px;
+  width: 100%;
+}
+.MovieDetails {
+  padding: 20px;
+  background-color: white;
+}
+.MovieTitleInfo {
+  display: flex;
+  justify-content: space-between;
+}
+.HorizontalLine {
+  margin: 0;
+  margin-bottom: 12px;
+  size: 4px;
+  height: 0.3px;
+  background-color: #f2f2f2;
+}
+.BookingButton,
+.BookingButton:focus {
+  padding: 10px 20px;
+  background-color: #0777fc;
+  border-radius: 10px;
+  color: white;
+  outline: none;
+}
