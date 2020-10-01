@@ -8,7 +8,6 @@ export default class MoviesPage extends Component {
     super(props);
 
     this.state = {
-      count: 9,
       movies: [],
     };
   }
@@ -18,11 +17,30 @@ export default class MoviesPage extends Component {
       movies: this.props.movies,
     });
   }
-
+  NavigateToMovie = (e, movie) => {
+    console.log(e, movie);
+    this.props.history.push(`/movies/${movie.id}`);
+  };
   PrepareData = (genre) => {
     console.log(genre);
+    if (genre === "All") {
+      this.setState({
+        movies: this.props.movies,
+      });
+    } else {
+      const movieList = this.props.movies.filter((movie) => {
+        if (movie.Genre === "science fiction") {
+          movie.Genre = "sci-fi";
+        }
+        if (movie.Genre === genre) {
+          return movie;
+        }
+      });
+      this.setState({
+        movies: movieList,
+      });
+    }
   };
-  // let moviesList = this.props.filter(movie =>{
 
   render() {
     return (
@@ -77,6 +95,17 @@ export default class MoviesPage extends Component {
               </span>
             </Link>
           </div>
+        </div>
+        <div className="listOfMovies">
+          {this.state.movies.map((movie) => {
+            return (
+              <MediaCard
+                key={movie.id}
+                movie={movie}
+                NavigateToCatagory={this.NavigateToMovie}
+              />
+            );
+          })}
         </div>
       </div>
     );
