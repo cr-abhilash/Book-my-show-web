@@ -6,9 +6,9 @@ import "./App.css";
 import AddTutorial from "./components/add-tutorial.component";
 import Tutorial from "./components/tutorial.component";
 import TutorialsList from "./components/tutorials-list.component";
-import homePage from "./components/home.page";
-import Header from "./components/HomePage/Header";
-import Footer from "./components/HomePage/Footer";
+import HomePage from "./components/HomePage";
+import Header from "./components/Header/Header";
+import Footer from "./components/Header/Footer";
 class App extends Component {
   render() {
     return (
@@ -16,7 +16,7 @@ class App extends Component {
         <Header />
         <div className="BodyContent">
           <Switch>
-            {/* <Route exact path={["/", "/homePage"]} component={homePage} /> */}
+            <Route exact path={["/", "/homePage"]} component={HomePage} />
             <Route exact path="/tutorials" component={TutorialsList} />
             <Route exact path="/add" component={AddTutorial} />
             <Route path="/tutorials/:id" component={Tutorial} />
