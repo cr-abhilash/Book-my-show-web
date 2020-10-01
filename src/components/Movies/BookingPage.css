@@ -1,0 +1,85 @@
+.BookingPage {
+  margin-left: 10%;
+  margin-right: 10%;
+  margin-top: 5%;
+  margin-bottom: 5%;
+  width: 80%;
+  background-color: white;
+  padding: 15px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 20px;
+}
+
+.row {
+  width: 100vh;
+  border-radius: 10px;
+  padding: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+.theatre {
+  margin-left: 20px;
+  width: 400px;
+  height: 50px;
+  border-radius: 20px;
+  background-color: #f2f2f2;
+  color: black;
+  outline: none;
+  border: 0.5px solid black;
+}
+.row label {
+  font-size: 25px;
+  font-weight: 200;
+}
+.date {
+  margin-left: 40px;
+  width: 400px;
+  height: 50px;
+  border-radius: 20px;
+  background-color: #f2f2f2;
+  color: black;
+  outline: none;
+  border: 0.5px solid black;
+}
+.show {
+  margin-left: 36px;
+  width: 400px;
+  height: 50px;
+  border-radius: 20px;
+  background-color: #f2f2f2;
+  color: black;
+  outline: none;
+  border: 0.5px solid black;
+}
+.seats {
+  margin-left: 10px;
+  width: 400px;
+  height: 50px;
+  border-radius: 20px;
+  background-color: #f2f2f2;
+  color: black;
+  outline: none;
+  border: 0.5px solid black;
+}
+.Amount {
+  margin-left: 10px;
+  width: 400px;
+  height: 50px;
+  border-radius: 15px;
+  background-color: #f2f2f2;
+  color: black;
+  outline: none;
+  border: 0.5px solid black;
+}
+.submit {
+  display: flex;
+  justify-content: center;
+  color: white;
+  background-color: #1f2533;
+}
