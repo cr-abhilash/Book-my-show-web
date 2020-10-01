@@ -1,0 +1,15 @@
+.Ncontainer {
+  height: 430px;
+  margin: 5%;
+}
+.HomePage-movies,
+.HomePage-Events {
+  display: flex;
+  justify-content: space-between;
+}
+
+.HomePage-title {
+  color: #333333;
+  display: flex;
+  justify-content: space-between;
+}
