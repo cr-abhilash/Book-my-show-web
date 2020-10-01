@@ -11,7 +11,7 @@ import Header from "./components/Header/Header";
 import Footer from "./components/Header/Footer";
 import TutorialDataService from "./services/tutorial.service";
 import MoviesPage from "./components/Movies/MoviesPage";
-import SingleMoviePage from "./components/singleMoviePage/SingleMoviePage";
+import SingleMoviePage from "./components/Movies/SingleMovie";
 class App extends Component {
   constructor(props) {
     super(props);

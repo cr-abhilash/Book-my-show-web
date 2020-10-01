@@ -13,7 +13,10 @@ export default class HomePage extends Component {
     console.log("component rendered");
     console.log("props", this.props);
   }
-
+  NavigateToMovie = (e, movie) => {
+    console.log(e, movie);
+    this.props.history.push(`/movies/${movie.id}`);
+  };
   render() {
     const movies = this.props.movies;
     return (
