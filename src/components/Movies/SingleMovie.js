@@ -1,4 +1,3 @@
-import { Button } from "@material-ui/core";
 import React, { Component } from "react";
 import "./SingleMoviePage.css";
 
@@ -34,6 +33,37 @@ export default class SingleMoviePage extends Component {
   render() {
     const movie = this.state.movieData;
 
-    return <div class="SingleMovieContainer">hai</div>;
+    return (
+      <div class="SingleMovieContainer">
+        <div className="MovieImage">
+          <img
+            src
+            className="media"
+            src={movie.movie_img_url}
+            className="SingleMovieImage"
+          ></img>
+        </div>
+        <div className="MovieDetails">
+          <div className="MovieTitleInfo">
+            <div>
+              <h5>{movie.Title}</h5>
+              <p>{`${movie.Genre} | ${movie.Runtime} | ${movie.Rating}`}</p>
+            </div>
+            <div>
+              <button className="BookingButton" onClick={this.NavigateToMovie}>
+                Book Tickets
+              </button>
+            </div>
+          </div>
+          <hr className="HorizontalLine" />
+          <p>
+            Watch on your nearest theatre | <span>&#8377;</span> 299
+          </p>
+          <hr className="HorizontalLine" />
+          <p>Director Name: {movie.Director}</p>
+          <p>StoryLine: {movie.Metascore}</p>
+        </div>
+      </div>
+    );
   }
 }
