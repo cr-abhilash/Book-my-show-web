@@ -60,6 +60,18 @@ export default class Header extends Component {
           </Link>
           {data}
         </div>
+        <div className="navBar">
+          <div className="events-category">
+            <Link to="/movies">Movies</Link>
+            <Link to="/tutorials">Events</Link>
+            <Link>Plays</Link>
+            <Link>Sports</Link>
+          </div>
+          <div className="events-regestred">
+            <Link>ListYourShow</Link>
+            <Link>Offers</Link>
+          </div>
+        </div>
       </div>
     );
   }
