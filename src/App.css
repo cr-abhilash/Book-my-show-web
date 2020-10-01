@@ -1,5 +1,5 @@
 body{
-  background-image: url("./components/eventPicture.jpg");
+  
 }
 
 .list {
@@ -23,11 +23,11 @@ body{
 
 }
 
-button{
+/* button{
   padding: 2em;
   border-radius: 60px;
   background-color: saddlebrown;
-}
+} */
 
 .list-group-item{
   display: flex;
