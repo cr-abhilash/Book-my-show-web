@@ -1,0 +1,23 @@
+.CatagoryPage {
+  margin-right: 5%;
+  margin-left: 5%;
+}
+.MoviesPageTitle {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+.movieGenres {
+  margin-left: 5%;
+}
+.movieGenres > * {
+  margin-left: 5%;
+  text-decoration: inherit;
+  color: inherit;
+}
+.listOfMovies {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
