@@ -13,17 +13,24 @@ import TutorialDataService from "./services/tutorial.service";
 import MoviesPage from "./components/Movies/MoviesPage";
 import SingleMoviePage from "./components/Movies/SingleMovie";
 import Booking from "./components/Movies/Booking";
+import SearchPage from "./components/Search";
 class App extends Component {
   constructor(props) {
     super(props);
     //this.retrieveTutorials = this.retrieveTutorials.bind(this);
     this.state = {
       moviesData: [],
+      search: "",
     };
   }
   componentDidMount() {
     this.retrieveTutorials();
   }
+  handleSearch = (e) => {
+    this.setState({
+      search: e.target.value,
+    });
+  };
   retrieveTutorials = () => {
     TutorialDataService.getAll()
       .then((response) => {
@@ -46,6 +53,17 @@ class App extends Component {
               path={["/", "/homePage"]}
               render={(props) => (
                 <HomePage {...props} movies={this.state.moviesData} />
+              )}
+            />
+            <Route
+              exact
+              path="/search"
+              render={(props) => (
+                <SearchPage
+                  {...props}
+                  movies={this.state.moviesData}
+                  search={this.state.search}
+                />
               )}
             />
             <Route
