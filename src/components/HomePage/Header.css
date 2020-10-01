@@ -1,0 +1,86 @@
+.header {
+  padding-left: 5%;
+  padding-right: 5%;
+  height: 70px;
+  width: 100%;
+  background-color: #333545;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.title {
+  color: #ffffff;
+  font-size: large;
+  font-weight: inherit;
+}
+.searchBarLink {
+  width: 40%;
+  height: 40px;
+}
+.searchBar {
+  width: 100%;
+  height: 40px;
+  border-radius: 10px;
+  background-color: white;
+  align-items: center;
+  border: 2px solid white;
+}
+.searchBar input {
+  height: 35px;
+  width: 80%;
+  outline: none;
+  border: none;
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+.signin-Block {
+  width: 200px;
+  display: flex;
+  justify-content: flex-end;
+}
+.userDetails {
+  width: 200px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  color: white;
+}
+.userDetails p {
+  font-size: 16px;
+  padding-top: 18px;
+  padding-left: 5px;
+}
+.navBar {
+  padding-left: 5%;
+  padding-right: 5%;
+  display: flex;
+  justify-content: space-between;
+  height: 50px;
+  background-color: #1f2533;
+  color: white;
+}
+.navBar .events-category {
+  width: 40%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  text-decoration: none;
+  color: white;
+}
+.navBar .events-category > * {
+  text-decoration: none;
+  color: white;
+  padding-right: 30px;
+}
+.navBar .events-regestred {
+  width: 40%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+.navBar .events-regestred > * {
+  text-decoration: none;
+  color: white;
+  margin: 10px;
+}
