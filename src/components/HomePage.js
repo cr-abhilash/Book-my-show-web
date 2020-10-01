@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import "./HomePage.css";
 import { Link } from "react-router-dom";
-
+import MediaCard from "./Card";
 export default class HomePage extends Component {
   constructor(props) {
     super(props);
@@ -20,8 +20,20 @@ export default class HomePage extends Component {
       <div className="HomePage">
         <div className="Ncontainer">
           <div className="HomePage-title">
-            <h2 onClick={this.featchData}>Movies</h2>
+            <h2>Movies</h2>
             <Link>view all</Link>
+          </div>
+          <div className="HomePage-movies">
+            {movies.map((movie) => {
+              if (movie.id < 4) {
+                return (
+                  <MediaCard
+                    movie={movie}
+                    NavigateToCatagory={this.NavigateToMovie}
+                  />
+                );
+              }
+            })}
           </div>
         </div>
         <div className="Ncontainer">
@@ -29,7 +41,12 @@ export default class HomePage extends Component {
             <h2>Events</h2>
             <Link>view all</Link>
           </div>
-          <div className="HomePage-Events"></div>
+          <div className="HomePage-Events">
+            {/* <MediaCard />
+            <MediaCard />
+            <MediaCard /> */}
+            {/* <h2>event details</h2> */}
+          </div>
         </div>
       </div>
     );
