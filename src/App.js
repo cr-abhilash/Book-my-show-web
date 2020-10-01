@@ -8,7 +8,7 @@ import Tutorial from "./components/tutorial.component";
 import TutorialsList from "./components/tutorials-list.component";
 import homePage from "./components/home.page";
 import Header from "./components/HomePage/Header";
-
+import Footer from "./components/HomePage/Footer";
 class App extends Component {
   render() {
     return (
@@ -22,6 +22,7 @@ class App extends Component {
             <Route path="/tutorials/:id" component={Tutorial} />
           </Switch>
         </div>
+        <Footer />
       </div>
     );
   }
