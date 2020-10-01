@@ -10,6 +10,7 @@ import HomePage from "./components/HomePage";
 import Header from "./components/Header/Header";
 import Footer from "./components/Header/Footer";
 import TutorialDataService from "./services/tutorial.service";
+import MoviesPage from "./components/Movies/MoviesPage";
 class App extends Component {
   constructor(props) {
     super(props);
@@ -43,6 +44,13 @@ class App extends Component {
               path={["/", "/homePage"]}
               render={(props) => (
                 <HomePage {...props} movies={this.state.moviesData} />
+              )}
+            />
+            <Route
+              exact
+              path="/movies"
+              render={(props) => (
+                <MoviesPage {...props} movies={this.state.moviesData} />
               )}
             />
             <Route exact path="/tutorials" component={TutorialsList} />
