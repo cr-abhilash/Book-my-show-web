@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import "./Header.css";
+import SignInDialog from "./SignInDialog";
+import SignUpDialog from "./SignUpDialog";
 import { Link } from "react-router-dom";
 import SearchOutlinedIcon from "@material-ui/icons/SearchOutlined";
 import AccountCircleOutlinedIcon from "@material-ui/icons/AccountCircleOutlined";
@@ -22,12 +24,12 @@ export default class Header extends Component {
         </div>
       ) : (
         <div className="signin-Block">
-          {/* <Link>
+          <Link>
             <SignInDialog></SignInDialog>
           </Link>
           <Link>
             <SignUpDialog></SignUpDialog>
-          </Link> */}
+          </Link>
         </div>
       );
     console.log(data);
