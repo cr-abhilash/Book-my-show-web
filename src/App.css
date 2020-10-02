@@ -1,7 +1,11 @@
-body{
-  
+body {
+  background-color: #f2f2f2;
 }
 
+Link {
+  text-decoration: inherit;
+  color: inherit;
+}
 .list {
   text-align: left;
   width: 70em;
@@ -13,14 +17,12 @@ body{
   max-width: 300px;
   margin: auto;
   background-color: palegoldenrod;
-
 }
 
 .edit-form {
   max-width: 300px;
   margin: auto;
-  background-color:palevioletred;
-
+  background-color: palevioletred;
 }
 
 /* button{
@@ -29,37 +31,37 @@ body{
   background-color: saddlebrown;
 } */
 
-.list-group-item{
+.list-group-item {
   display: flex;
   justify-content: space-around;
   border: 5px solid thistle;
-  padding: .5em;
+  padding: 0.5em;
   font-size: 1.5em;
   height: 5em;
   margin-top: 1em;
   background-image: url("./components/Images/newYellow.webp");
 }
 .col-md-6,
-#publish{
-  background-color: royalblue; 
-} 
-#head-name{
+#publish {
+  background-color: royalblue;
+}
+#head-name {
   color: beige;
 }
-#notPublish{
+#notPublish {
   background-color: yellowgreen;
 }
-.form-group{
+.form-group {
   background-color: teal;
   padding: 2em;
   border-radius: 30px;
 }
-#main-page{
+#main-page {
   display: flex;
   flex-wrap: wrap;
 }
 
-img{
+img {
   height: 30em;
   width: 70em;
 }
@@ -67,16 +69,16 @@ img{
   background-color: yellow;
 } */
 
-#test{
+#test {
   background-image: url("./components/Images/purple-pink.jpg");
   height: 18em;
-  font-size:2em;
+  font-size: 2em;
   text-align: center;
-  color:rgb(46, 46, 90);
+  color: rgb(46, 46, 90);
   margin-top: 4em;
   border-radius: 30px;
 }
-#head{
+#head {
   background-image: url("./components/Images/panoroma.jpg");
   height: 13em;
   width: 116em;
@@ -84,9 +86,9 @@ img{
   margin-top: -5em;
   text-align: right;
 }
-.contact-form{
+.contact-form {
   margin-top: 5em;
   display: flex;
-  color:white;
+  color: white;
   font-weight: bold;
 }

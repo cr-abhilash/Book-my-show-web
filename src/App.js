@@ -45,7 +45,7 @@ class App extends Component {
   render() {
     return (
       <div>
-        <Header />
+        <Header searchHandler={this.handleSearch} />
         <div className="BodyContent">
           <Switch>
             <Route
@@ -68,8 +68,8 @@ class App extends Component {
             />
             <Route
               exact
-              path="/movies/:id/booking"
-              render={(props) => <Booking />}
+              path="/movies/booking/:id"
+              render={(props) => <Booking {...props} />}
             />
             <Route
               exact

@@ -17,7 +17,7 @@ export default class SingleMoviePage extends Component {
 
   NavigateToMovie = (e) => {
     console.log("click");
-    this.props.history.push(`/movies/123/Booking`);
+    this.props.history.push(`/movies/Booking/${this.state.movieData.id}`);
   };
   featchMovieDataById(id) {
     TutorialDataService.get(id)
