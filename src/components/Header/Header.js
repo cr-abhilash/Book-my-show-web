@@ -5,21 +5,52 @@ import SignUpDialog from "./SignUpDialog";
 import { Link } from "react-router-dom";
 import SearchOutlinedIcon from "@material-ui/icons/SearchOutlined";
 import AccountCircleOutlinedIcon from "@material-ui/icons/AccountCircleOutlined";
+import Menu from "@material-ui/core/Menu";
+import MenuItem from "@material-ui/core/MenuItem";
 export default class Header extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      signinStatus: false,
+      signinStatus: true,
       signupStatus: false,
+      menuState: null,
     };
   }
+  handleClick = (event) => {
+    this.setState({
+      menuState: event.currentTarget,
+    });
+  };
 
+  handleClose = () => {
+    this.setState({
+      menuState: null,
+      signinStatus: false,
+      signupStatus: false,
+    });
+  };
   render() {
     const data =
       this.state.signinStatus || this.state.signupStatus ? (
         <div className="userDetails">
-          <AccountCircleOutlinedIcon />
+          <div>
+            <AccountCircleOutlinedIcon
+              aria-controls="simple-menu"
+              aria-haspopup="true"
+              onClick={this.handleClick}
+            />
+            <Menu
+              id="simple-menu"
+              anchorEl={this.state.menuState}
+              keepMounted
+              open={Boolean(this.state.menuState)}
+              onClose={this.handleClose}
+              style={{ marginTop: 30 }}
+            >
+              <MenuItem onClick={this.handleClose}>Logout</MenuItem>
+            </Menu>
+          </div>
           <p>Hi Abhilash </p>
         </div>
       ) : (
