@@ -25,15 +25,31 @@ const useStyles = makeStyles((theme) => ({
 export default function SignInDialog() {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
-
+  const [userName, setUserName] = React.useState("");
+  const [password, setPassWord] = React.useState("");
   const handleClickOpen = () => {
     setOpen(true);
   };
+  const UpdateName = (event) => {
+    event.preventDefault();
 
+    setUserName(event.target.value);
+  };
+  const UpdatePassword = (event) => {
+    event.preventDefault();
+
+    setPassWord(event.target.value);
+  };
   const handleClose = () => {
     setOpen(false);
   };
-
+  const handleSignIn = () => {
+    if (userName === "" || userName.length > 100) {
+      alert("User Name is required");
+    } else if (password === "" || password.length < 4) {
+      alert("password required(minimum of 4 character)");
+    }
+  };
   return (
     <div>
       <Button className={classes.SignInButton} onClick={handleClickOpen}>
@@ -53,26 +69,31 @@ export default function SignInDialog() {
             autoFocus
             margin="dense"
             id="name"
-            label="User Name:"
+            label="User Id:"
             type="email"
+            value={userName}
             fullWidth
+            required
             placeholder="Enter your user name"
+            onChange={UpdateName}
           />
           <TextField
-            autoFocus
             margin="dense"
             id="name"
-            label="Password:"
+            label="Password: required minimum 4 character"
             type="password"
             placeholder="Enter your user password"
             fullWidth
+            required
+            onChange={UpdatePassword}
           />
         </DialogContent>
+
         <DialogActions>
           <Button onClick={handleClose} color="primary">
             Cancel
           </Button>
-          <Button onClick={handleClose} color="primary">
+          <Button onClick={handleSignIn} color="primary">
             Sign In
           </Button>
         </DialogActions>

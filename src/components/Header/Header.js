@@ -12,7 +12,7 @@ export default class Header extends Component {
     super(props);
 
     this.state = {
-      signinStatus: true,
+      signinStatus: false,
       signupStatus: false,
       menuState: null,
     };
