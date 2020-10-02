@@ -27,7 +27,7 @@ export default class Booking extends Component {
       movieID: "4",
       paymentStatus: "paid",
       seatNumber: data.get("seat"),
-      time: String(data.get("date")),
+      time: String(data.get("date")) + "/" + data.get("shows"),
     };
     if (this.state.count == 0) {
       TutorialDataService.Booking(BookingData)

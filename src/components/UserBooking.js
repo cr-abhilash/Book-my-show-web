@@ -8,13 +8,13 @@ import "./Card.css";
 const useStyles = makeStyles({
   root: {
     width: "30%",
-    maxHeight: 400,
+    maxHeight: 450,
     border: "solid 1px black",
     color: "#333333",
     marginBottom: "5%",
   },
   media: {
-    height: 200,
+    height: 250,
     width: "100%",
     objectFit: "cover",
     border: "solid 2px yellow",
@@ -27,33 +27,40 @@ const useStyles = makeStyles({
 export default function BookingCard(props) {
   const classes = useStyles();
   const { movie } = props;
+  console.log(movie);
   return (
     <Card
       className={classes.root}
-      //   onClick={(e) => props.NavigateToCatagory(e, movie)}
+      onClick={(e) => props.NavigateToCatagory(e, movie)}
     >
       <CardActionArea>
         <img
           className="media"
-          //   src={movie.movie_img_url}
+          src={movie.movie_img_url}
           style={{
-            height: 300,
+            height: 200,
             width: "100%",
           }}
         ></img>
 
         <CardContent className={classes.CardContent}>
           <p style={{ fontSize: 16, fontWeight: "bold", margin: "0" }}>
-            {/* Title {movie.Title | movie.Runtime} */}
+            {movie.Title}
           </p>
           <p style={{ fontSize: 14, margin: "0" }}>
-            {/* No of seats:{movie.seatNumber} */}
+            <b>No of seats:</b>No of seats:{movie.seatNumber}
           </p>
           <p style={{ fontSize: 14, margin: "0" }}>
-            Theatre Name:{/* Theatre Name:{movie.theatre_Name} */}
+            <b>Date/time:</b>
+            {movie.time}
           </p>
           <p style={{ fontSize: 14, margin: "0" }}>
-            {/* Location:{movie.theatre_Location} */}
+            <b>Theatre Name:</b>
+            {movie.theatre_Name}
+          </p>
+          <p style={{ fontSize: 14, margin: "0" }}>
+            <b>Location:</b>
+            {movie.theatre_Location}
           </p>
         </CardContent>
       </CardActionArea>
