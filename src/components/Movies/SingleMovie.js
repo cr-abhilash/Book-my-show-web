@@ -15,9 +15,13 @@ export default class SingleMoviePage extends Component {
     this.featchMovieDataById(this.props.match.params.id);
   }
 
-  NavigateToMovie = (e) => {
-    console.log("click");
-    this.props.history.push(`/movies/Booking/${this.state.movieData.id}`);
+  NavigateToBooking = (e) => {
+    if (localStorage.getItem("token") != "") {
+      console.log("click");
+      this.props.history.push(`/movies/Booking/${this.state.movieData.id}`);
+    } else {
+      alert("Please SignIn/SignUp before booking");
+    }
   };
   featchMovieDataById(id) {
     TutorialDataService.get(id)
@@ -50,7 +54,10 @@ export default class SingleMoviePage extends Component {
               <p>{`${movie.Genre} | ${movie.Runtime} | ${movie.Rating}`}</p>
             </div>
             <div>
-              <button className="BookingButton" onClick={this.NavigateToMovie}>
+              <button
+                className="BookingButton"
+                onClick={this.NavigateToBooking}
+              >
                 Book Tickets
               </button>
             </div>

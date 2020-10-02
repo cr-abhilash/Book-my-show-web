@@ -43,10 +43,23 @@ export default function SignInDialog() {
       email === "" ||
       !email.match(/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/)
     ) {
-      alert("enter valid email");
+      alert("Invalid User Id");
     } else {
+      const data = {
+        userId: email,
+        userName: userName,
+        password: password,
+      };
       console.log("handle Signin");
       TutorialDataService.signUp("signUp");
+      // .then((res) => {
+      //   console.log(res.body);
+      //   localStorage.setItem("token", "abc");
+      //   localStorage.setItem("userId", "userId");
+      // })
+      // .catch((err) => {
+      //   console.log(err);
+      // });
     }
   };
   const UpdateName = (event) => {

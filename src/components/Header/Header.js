@@ -24,6 +24,8 @@ export default class Header extends Component {
   };
 
   handleClose = () => {
+    localStorage.setItem("token", "");
+    localStorage.setItem("userId", "");
     this.setState({
       menuState: null,
       signinStatus: false,

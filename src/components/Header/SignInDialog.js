@@ -45,13 +45,30 @@ export default function SignInDialog() {
     setOpen(false);
   };
   const handleSignIn = () => {
-    if (userName === "" || userName.length > 100) {
-      alert("User Name is required");
+    if (
+      userName === "" ||
+      !userName.match(/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/)
+    ) {
+      alert("Invalid User Id");
     } else if (password === "" || password.length < 4) {
       alert("password required(minimum of 4 character)");
     } else {
       console.log("handle Signin");
-      TutorialDataService.signIn("signing in");
+      const data = {
+        userId: userName,
+        password: password,
+      };
+      localStorage.setItem("token", "abc");
+      localStorage.setItem("userId", "userId");
+      TutorialDataService.signIn(data);
+      // .then((res) => {
+      //   console.log(res.body);
+      //   localStorage.setItem("token", "abc");
+      //   localStorage.setItem("userId", "userId");
+      // })
+      // .catch((err) => {
+      //   console.log(err);
+      // });
     }
   };
   return (
