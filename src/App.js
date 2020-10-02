@@ -14,6 +14,7 @@ import MoviesPage from "./components/Movies/MoviesPage";
 import SingleMoviePage from "./components/Movies/SingleMovie";
 import Booking from "./components/Movies/Booking";
 import SearchPage from "./components/Search";
+import UserPage from "./components/UserPage";
 class App extends Component {
   constructor(props) {
     super(props);
@@ -65,6 +66,11 @@ class App extends Component {
                   search={this.state.search}
                 />
               )}
+            />
+            <Route
+              exact
+              path="/userBooking"
+              render={(props) => <UserPage {...props} />}
             />
             <Route
               exact

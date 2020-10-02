@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import "./BookingPage.css";
-
+import TutorialDataService from "../../services/tutorial.service";
 export default class Booking extends Component {
   constructor(props) {
     super(props);
@@ -18,6 +18,7 @@ export default class Booking extends Component {
     const data = new FormData(event.target);
 
     console.log(data.get("date"));
+    //TutorialDataService.Booking(data);
   };
   CalcAmount = (event) => {
     const n = event.target.value;

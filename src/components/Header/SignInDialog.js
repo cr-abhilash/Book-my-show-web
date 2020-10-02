@@ -4,9 +4,10 @@ import TextField from "@material-ui/core/TextField";
 import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
-import DialogContentText from "@material-ui/core/DialogContentText";
+
 import DialogTitle from "@material-ui/core/DialogTitle";
 import { makeStyles } from "@material-ui/core/styles";
+import TutorialDataService from "../../services/tutorial.service";
 const useStyles = makeStyles((theme) => ({
   signinTitle: {
     textAlign: "center",
@@ -48,6 +49,9 @@ export default function SignInDialog() {
       alert("User Name is required");
     } else if (password === "" || password.length < 4) {
       alert("password required(minimum of 4 character)");
+    } else {
+      console.log("handle Signin");
+      //TutorialDataService.signIn(data);
     }
   };
   return (

@@ -23,7 +23,9 @@ const useStyles = makeStyles((theme) => ({
 export default function SignInDialog() {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
-
+  const [userName, setUserName] = React.useState("");
+  const [password, setPassWord] = React.useState("");
+  const [email, setEmail] = React.useState("");
   const handleClickOpen = () => {
     setOpen(true);
   };

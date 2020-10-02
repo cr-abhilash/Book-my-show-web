@@ -12,7 +12,7 @@ export default class Header extends Component {
     super(props);
 
     this.state = {
-      signinStatus: false,
+      signinStatus: true,
       signupStatus: false,
       menuState: null,
     };
@@ -101,7 +101,9 @@ export default class Header extends Component {
             <Link>Sports</Link>
           </div>
           <div className="events-regestred">
-            <Link>ListYourShow</Link>
+            {this.state.signinStatus ? (
+              <Link to="/userBooking">ListYourShow</Link>
+            ) : null}
             <Link>Offers</Link>
           </div>
         </div>
