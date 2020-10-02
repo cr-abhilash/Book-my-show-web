@@ -21,7 +21,7 @@ const useStyles = makeStyles((theme) => ({
     color: "#ffffff",
   },
 }));
-export default function SignInDialog() {
+export default function SignInDialog(props) {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
   const [userName, setUserName] = React.useState("");
@@ -46,20 +46,25 @@ export default function SignInDialog() {
       alert("Invalid User Id");
     } else {
       const data = {
-        userId: email,
-        userName: userName,
+        user_id: email,
+        user_name: userName,
         password: password,
       };
-      console.log("handle Signin");
-      TutorialDataService.signUp("signUp");
-      // .then((res) => {
-      //   console.log(res.body);
-      //   localStorage.setItem("token", "abc");
-      //   localStorage.setItem("userId", "userId");
-      // })
-      // .catch((err) => {
-      //   console.log(err);
-      // });
+      console.log(data);
+      TutorialDataService.signUp(data)
+        .then((res) => {
+          if (res.statusText == "OK") {
+            console.log("hhttp responce", res.data);
+            // props.ChangeState();
+            alert("signUp successful please login proceed");
+            localStorage.setItem("userId", "userId");
+          } else {
+            alert("signUp failed");
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     }
   };
   const UpdateName = (event) => {

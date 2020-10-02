@@ -24,7 +24,7 @@ export default class HomePage extends Component {
         <div className="Ncontainer">
           <div className="HomePage-title">
             <h2>Movies</h2>
-            <Link>view all</Link>
+            <Link to="/movies">view all</Link>
           </div>
           <div className="HomePage-movies">
             {movies.map((movie) => {
@@ -39,7 +39,7 @@ export default class HomePage extends Component {
             })}
           </div>
         </div>
-        <div className="Ncontainer">
+        {/* <div className="Ncontainer">
           <div className="HomePage-title">
             <h2>Events</h2>
             <Link>view all</Link>
@@ -48,9 +48,9 @@ export default class HomePage extends Component {
             {/* <MediaCard />
             <MediaCard />
             <MediaCard /> */}
-            {/* <h2>event details</h2> */}
+        {/* <h2>event details</h2> 
           </div>
-        </div>
+        </div>  */}
       </div>
     );
   }

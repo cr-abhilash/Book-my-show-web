@@ -8,13 +8,14 @@ class TutorialDataService {
   get(id) {
     return http.get(`/movie/${id}`);
   }
-  signIn(data) {
-    console.log(data);
-    //return http.post("", data);
+  signIn(data, id) {
+    const data1 = JSON.stringify(data);
+    console.log(data1);
+    return http.post(`/user/login/${id}`, data1);
   }
   signUp(data) {
-    console.log(data);
-    //return http.post("", data);
+    const data1 = JSON.stringify(data);
+    return http.post("/user", data1);
   }
   Booking(data) {
     console.log(data);
@@ -22,7 +23,7 @@ class TutorialDataService {
   }
   getBooking(id) {
     console.log(id);
-    //return http.get(``);
+    return http.get(`/booking/all/${id}`);
   }
   create(data) {
     return http.post("/tutorials", data);

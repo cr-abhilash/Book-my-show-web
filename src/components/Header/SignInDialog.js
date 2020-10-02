@@ -23,7 +23,7 @@ const useStyles = makeStyles((theme) => ({
     marginRight: "10px",
   },
 }));
-export default function SignInDialog() {
+export default function SignInDialog(props) {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
   const [userName, setUserName] = React.useState("");
@@ -50,25 +50,27 @@ export default function SignInDialog() {
       !userName.match(/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/)
     ) {
       alert("Invalid User Id");
-    } else if (password === "" || password.length < 4) {
+    } else if (password === "" || password.length < 2) {
       alert("password required(minimum of 4 character)");
     } else {
       console.log("handle Signin");
       const data = {
-        userId: userName,
+        user_id: userName,
         password: password,
       };
-      localStorage.setItem("token", "abc");
-      localStorage.setItem("userId", "userId");
-      TutorialDataService.signIn(data);
-      // .then((res) => {
-      //   console.log(res.body);
-      //   localStorage.setItem("token", "abc");
-      //   localStorage.setItem("userId", "userId");
-      // })
-      // .catch((err) => {
-      //   console.log(err);
-      // });
+      console.log(data);
+      TutorialDataService.signIn(data, userName).then((res) => {
+        console.log(res);
+        console.log(res.data);
+        if (res.statusText == "OK") {
+          console.log(res.data);
+          props.ChangeState();
+          localStorage.setItem("token", res.data.token);
+          localStorage.setItem("userId", userName);
+        } else {
+          alert("signIn failed");
+        }
+      });
     }
   };
   return (

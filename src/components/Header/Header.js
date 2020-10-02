@@ -12,7 +12,7 @@ export default class Header extends Component {
     super(props);
 
     this.state = {
-      signinStatus: true,
+      signinStatus: false,
       signupStatus: false,
       menuState: null,
     };
@@ -30,6 +30,11 @@ export default class Header extends Component {
       menuState: null,
       signinStatus: false,
       signupStatus: false,
+    });
+  };
+  ChangeLoginState = () => {
+    this.setState({
+      signinStatus: true,
     });
   };
   render() {
@@ -53,15 +58,15 @@ export default class Header extends Component {
               <MenuItem onClick={this.handleClose}>Logout</MenuItem>
             </Menu>
           </div>
-          <p>Hi Abhilash </p>
+          <p>Hi ... </p>
         </div>
       ) : (
         <div className="signin-Block">
           <Link>
-            <SignInDialog></SignInDialog>
+            <SignInDialog ChangeState={this.ChangeLoginState}></SignInDialog>
           </Link>
           <Link>
-            <SignUpDialog></SignUpDialog>
+            <SignUpDialog ChangeState={this.ChangeLoginState}></SignUpDialog>
           </Link>
         </div>
       );
@@ -98,7 +103,7 @@ export default class Header extends Component {
         <div className="navBar">
           <div className="events-category">
             <Link to="/movies">Movies</Link>
-            <Link to="/tutorials">Events</Link>
+            <Link>Events</Link>
             <Link>Plays</Link>
             <Link>Sports</Link>
           </div>

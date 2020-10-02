@@ -48,7 +48,8 @@ export default function BookingCard(props) {
             {movie.Title}
           </p>
           <p style={{ fontSize: 14, margin: "0" }}>
-            <b>No of seats:</b>No of seats:{movie.seatNumber}
+            <b>No of seats:</b>
+            {movie.seatNumber}
           </p>
           <p style={{ fontSize: 14, margin: "0" }}>
             <b>Date/time:</b>

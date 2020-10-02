@@ -12,11 +12,20 @@ export default class UserPage extends Component {
     };
   }
   componentDidMount() {
+    const id = localStorage.getItem("userId");
     console.log("user page rendered");
-    TutorialDataService.getBooking("abcd");
+    TutorialDataService.getBooking(id)
+      .then((res) => {
+        console.log(res.data);
+        if (res.statusText == "OK") {
+          this.setState({
+            Bookingdata: res.data,
+          });
+        }
+      })
+      .catch((err) => console.log(err));
   }
   NavigateToMovie = (e, movie) => {
-    console.log(e, movie);
     this.props.history.push(`/movies/${movie.id}`);
   };
   render() {
@@ -53,7 +62,7 @@ export default class UserPage extends Component {
       <div className="userContainer">
         <h3 className="userTitle">Booking details</h3>
         <div className="userMovieContainer">
-          {data.map((movie) => {
+          {this.state.Bookingdata.map((movie) => {
             return (
               <BookingCard
                 key={movie.id}

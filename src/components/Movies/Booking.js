@@ -22,7 +22,7 @@ export default class Booking extends Component {
     //   this.state.Amount
     // );
     const BookingData = {
-      userID: "gowda@gmail.com",
+      userID: localStorage.getItem("userId"),
       theaterID: data.get("theatre"),
       movieID: "4",
       paymentStatus: "paid",
