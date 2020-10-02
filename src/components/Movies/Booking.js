@@ -6,19 +6,41 @@ export default class Booking extends Component {
     super(props);
 
     this.state = {
-      theatreName: "",
-      shoeTime: "",
-      Date: "",
-      NoOfSeats: 0,
       Amount: 0,
+      count: 0,
     };
   }
   handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.target);
-
-    console.log(data.get("date"));
-    //TutorialDataService.Booking(data);
+    console.log("data", data);
+    // console.log(
+    //   typeof data.get("date"),
+    //   data.get("theatre"),
+    //   data.get("shows"),
+    //   data.get("seat"),
+    //   this.state.Amount
+    // );
+    const BookingData = {
+      userID: "gowda@gmail.com",
+      theaterID: data.get("theatre"),
+      movieID: "4",
+      paymentStatus: "paid",
+      seatNumber: data.get("seat"),
+      time: String(data.get("date")),
+    };
+    if (this.state.count == 0) {
+      TutorialDataService.Booking(BookingData)
+        .then((res) => {
+          this.state.count++;
+          if (res.statusText == "OK") {
+            alert("Booking successful");
+          } else {
+            alert("Booking failed");
+          }
+        })
+        .catch((err) => console.log(err));
+    }
   };
   CalcAmount = (event) => {
     const n = event.target.value;
@@ -40,11 +62,9 @@ export default class Booking extends Component {
                 {" "}
                 Select theatre
               </option>
-              <option value="PVR">PVR, Kormangala Bengaluru Karnataka</option>
-              <option value="INOX">
-                INOX, Mantri Square Bengaluru Karnataka
-              </option>
-              <option value="Urvashi" required>
+              <option value="1">PVR, Kormangala Bengaluru Karnataka</option>
+              <option value="2">INOX, Mantri Square Bengaluru Karnataka</option>
+              <option value="3" required>
                 Urvashi, lalbagh Road Bengaluru Karnataka{" "}
               </option>
             </select>
@@ -77,6 +97,7 @@ export default class Booking extends Component {
             <input
               className="seats"
               type="number"
+              name="seat"
               min="1"
               max="25"
               required

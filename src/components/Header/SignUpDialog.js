@@ -6,6 +6,7 @@ import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import { makeStyles } from "@material-ui/core/styles";
+import TutorialDataService from "../../services/tutorial.service";
 const useStyles = makeStyles((theme) => ({
   signinTitle: {
     textAlign: "center",
@@ -33,10 +34,36 @@ export default function SignInDialog() {
   const handleClose = () => {
     setOpen(false);
   };
-  const handleSubmit = (e) => {
-    console.log(e.target.value);
+  const handleSubmit = () => {
+    if (userName === "" || userName.length > 100) {
+      alert("User Name is required");
+    } else if (password === "" || password.length < 4) {
+      alert("password required(minimum of 4 character)");
+    } else if (
+      email === "" ||
+      !email.match(/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/)
+    ) {
+      alert("enter valid email");
+    } else {
+      console.log("handle Signin");
+      TutorialDataService.signUp("signUp");
+    }
   };
+  const UpdateName = (event) => {
+    event.preventDefault();
 
+    setUserName(event.target.value);
+  };
+  const UpdatePassword = (event) => {
+    event.preventDefault();
+
+    setPassWord(event.target.value);
+  };
+  const UpdateEmail = (event) => {
+    event.preventDefault();
+
+    setEmail(event.target.value);
+  };
   return (
     <div>
       <Button className={classes.SignInButton} onClick={handleClickOpen}>
@@ -56,9 +83,11 @@ export default function SignInDialog() {
             autoFocus
             margin="dense"
             id="fullName"
+            value={userName}
             label="Full Name:"
             type="text"
             fullWidth
+            onChange={UpdateName}
             placeholder="Enter your full name"
           />
           <TextField
@@ -67,15 +96,19 @@ export default function SignInDialog() {
             id="email"
             label="Email:"
             type="text"
+            value={email}
             fullWidth
+            onChange={UpdateEmail}
             placeholder="Enter your email id"
           />
           <TextField
             autoFocus
             margin="dense"
             id="name"
+            value={password}
             label="Password:"
             type="password"
+            onChange={UpdatePassword}
             placeholder="Enter your user password"
             fullWidth
           />

@@ -30,12 +30,12 @@ export default function BookingCard(props) {
   return (
     <Card
       className={classes.root}
-      onClick={(e) => props.NavigateToCatagory(e, movie)}
+      //   onClick={(e) => props.NavigateToCatagory(e, movie)}
     >
       <CardActionArea>
         <img
           className="media"
-          src={movie.movie_img_url}
+          //   src={movie.movie_img_url}
           style={{
             height: 300,
             width: "100%",
@@ -44,10 +44,17 @@ export default function BookingCard(props) {
 
         <CardContent className={classes.CardContent}>
           <p style={{ fontSize: 16, fontWeight: "bold", margin: "0" }}>
-            {movie.Title}
+            {/* Title {movie.Title | movie.Runtime} */}
           </p>
-          <p style={{ fontSize: 14, margin: "0" }}>Run Time:{movie.Runtime}</p>
-          <p style={{ fontSize: 14, margin: "0" }}>Director:{movie.Director}</p>
+          <p style={{ fontSize: 14, margin: "0" }}>
+            {/* No of seats:{movie.seatNumber} */}
+          </p>
+          <p style={{ fontSize: 14, margin: "0" }}>
+            Theatre Name:{/* Theatre Name:{movie.theatre_Name} */}
+          </p>
+          <p style={{ fontSize: 14, margin: "0" }}>
+            {/* Location:{movie.theatre_Location} */}
+          </p>
         </CardContent>
       </CardActionArea>
     </Card>

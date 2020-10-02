@@ -8,7 +8,22 @@ class TutorialDataService {
   get(id) {
     return http.get(`/movie/${id}`);
   }
-
+  signIn(data) {
+    console.log(data);
+    //return http.post("", data);
+  }
+  signUp(data) {
+    console.log(data);
+    //return http.post("", data);
+  }
+  Booking(data) {
+    console.log(data);
+    return http.post("/booking/", data);
+  }
+  getBooking(id) {
+    console.log(id);
+    //return http.get(``);
+  }
   create(data) {
     return http.post("/tutorials", data);
   }

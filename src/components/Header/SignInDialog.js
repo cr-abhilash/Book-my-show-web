@@ -51,7 +51,7 @@ export default function SignInDialog() {
       alert("password required(minimum of 4 character)");
     } else {
       console.log("handle Signin");
-      //TutorialDataService.signIn(data);
+      TutorialDataService.signIn("signing in");
     }
   };
   return (

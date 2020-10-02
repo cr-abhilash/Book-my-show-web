@@ -1,16 +1,16 @@
-.searchContainer {
+.userContainer {
   margin-top: 20px;
   margin-left: 7%;
   margin-right: 7%;
   width: 86%;
   min-height: 500px;
 }
-.searchMovieContainer {
+.userMovieContainer {
   width: 100%;
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
 }
-.searchTitle {
+.userTitle {
   font-size: 30px;
 }
